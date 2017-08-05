@@ -1,0 +1,41 @@
+![Coderbox](https://s3-eu-west-1.amazonaws.com/coderbox/common/logo-blue.png)
+
+[![npm](https://img.shields.io/npm/dm/@coderbox/forms.svg)](https://www.npmjs.com/package/@coderbox/forms)
+[![npm](https://img.shields.io/npm/v/@coderbox/forms.svg)](https://www.npmjs.com/package/@coderbox/forms)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![codebeat badge](https://codebeat.co/badges/881b0552-e916-41a5-b2df-632f1610f7b9)](https://codebeat.co/projects/github-com-coderboxapp-coderbox-atoms-master)
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+
+# Introduction
+`coderbox-forms` is a collection of REACT components used to build forms at [Coderbox](https://www.coderbox.me)
+
+# Installation
+
+```
+npm install @coderbox/forms --save
+```
+```
+yarn add @coderbox/forms
+```
+Works with [browserify](https://github.com/substack/node-browserify) and [webpack](https://github.com/visionmedia/superagent/wiki/SuperAgent-for-Webpack).
+
+# Demo
+[DEMO Page](https://coderboxapp.github.io/coderbox-atoms/)
+
+For code example check `.stories.js` files from each component.
+
+# Components List
+
+- [ ] Field
+- [ ] Label
+- [ ] Control
+- [ ] Input
+- [ ] Checkbox
+- [ ] Textarea
+- [ ] Select
+
+# Build
+
+```
+npm run build
+```
