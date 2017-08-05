@@ -16,7 +16,7 @@ const BoxElement = styled.div`
     if (p.withSpace) {
       return css`
         > * {
-          margin-right: ${p.withSpace};
+          margin-bottom: ${p.withSpace};
         }
       `
     }

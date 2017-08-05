@@ -26,10 +26,9 @@ For code example check `.stories.js` files from each component.
 
 # Components List
 
-- [ ] Field
-- [ ] Label
-- [ ] Control
-- [ ] Input
+- [x] Field
+- [x] Control
+- [x] Input
 - [ ] Checkbox
 - [ ] Textarea
 - [ ] Select
