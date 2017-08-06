@@ -27,11 +27,14 @@ For code example check `.stories.js` files from each component.
 # Components List
 
 - [x] Field
+- [x] FieldGroup
 - [x] Control
+- [x] ControlGroup
 - [x] Input
+- [x] Select
+- [ ] Autocomplete
 - [ ] Checkbox
 - [ ] Textarea
-- [ ] Select
 
 # Build
 
