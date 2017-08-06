@@ -12,8 +12,9 @@ const states = [
 storiesOf('Dropdown', module)
   .add('default', () => {
     return (
-      <Box>
-        <Dropdown options={states} />
+      <Box withSpace='0.5rem'>
+        <Dropdown isSize='small' options={states} placeholder='Select state' />
+        <Dropdown isSize='normal' options={states} placeholder='Select state' isSearch />
       </Box>
     )
   })

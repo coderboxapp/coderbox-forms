@@ -19,7 +19,7 @@ class Input extends React.Component {
   }
 
   render () {
-    const { type, ...props } = this.props
+    const { type, readonly, ...props } = this.props
     const className = cx(`input`, props.className)
 
     return (
@@ -27,6 +27,7 @@ class Input extends React.Component {
         innerRef={this.handleRef}
         {...props}
         type={type}
+        readonly={readonly}
         className={className} />
     )
   }

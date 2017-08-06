@@ -9,6 +9,8 @@ export const Menu = styled.div`
   border-color: ${p => p.theme.palettes[p.isColor][p.isTone]};
   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
   background-color: white;
+  box-sizing: border-box;
+  z-index: 4;
 
   ${isSize}
   ${isHidden}
