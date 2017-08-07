@@ -5,6 +5,7 @@
   "main": "lib/coderbox-atoms.js",
   "scripts": {
     "prepare": "yarn build",
+    "standard": "standard",
     "build": "webpack --env production",
     "dev": "webpack --progress --colors --watch --env development",
     "storybook": "start-storybook -p 6006",
@@ -19,6 +20,17 @@
     "react",
     "components"
   ],
+  "standard": {
+    "env": [
+      "jest"
+    ],
+    "globals": [],
+    "ignore": [
+      "node_modules/**",
+      "lib/**"
+    ],
+    "parser": "babel-eslint"
+  },
   "author": "Ghiura Alexandru <ghalex@gmail.com>",
   "license": "ISC",
   "devDependencies": {
@@ -32,12 +44,11 @@
     "babel-plugin-add-module-exports": "0.2.1",
     "babel-plugin-module-resolver": "^2.7.1",
     "babel-plugin-styled-components": "^1.1.7",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-es2015": "6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "eslint": "^4.3.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "standard": "^10.0.2",
+    "standard": "^10.0.3",
     "webpack": "^3.4.1",
     "webpack-node-externals": "^1.6.0",
     "yargs": "^8.0.2"
