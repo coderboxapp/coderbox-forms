@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 
 const hasIcons = ({ hasIcons }) => {
   if (!hasIcons) return
+
   return css`
     & .icon {
       position: absolute;
@@ -29,6 +30,7 @@ const hasIcons = ({ hasIcons }) => {
 export const Control = styled.div`
   position: relative;
   display: flex;
+  color: #dbdbdb;
 
   ${hasIcons}
 `

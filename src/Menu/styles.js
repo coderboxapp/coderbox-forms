@@ -1,20 +1,30 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { isSize, isHidden } from 'styled-utils'
 
 export const Menu = styled.div`
   width: 100%;
   font-family: ${p => p.theme.fonts.primary};
-  border: 1px solid;
-  border-radius: 3px;
-  border-color: ${p => p.theme.palettes[p.isColor][p.isTone]};
-  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
   background-color: white;
   box-sizing: border-box;
   z-index: 4;
 
+  & .button {
+    justify-content: flex-start;
+  }
+
+  & .buttons {
+  }
+
   ${isSize}
   ${isHidden}
 `
+
+const isSelected = ({ isSelected }) => {
+  if (!isSelected) return
+  return css`
+    background-color: #efefef;
+  `
+}
 
 export const Item = styled.div`
   font-family: inherit;
@@ -41,4 +51,6 @@ export const Item = styled.div`
   &:hover {
     background-color: #efefef;
   }
+
+  ${isSelected}
 `

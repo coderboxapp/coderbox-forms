@@ -49,17 +49,17 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "standard": "^10.0.3",
-    "webpack": "^3.4.1",
+    "webpack": "^3.5.0",
     "webpack-node-externals": "^1.6.0",
     "yargs": "^8.0.2"
   },
   "dependencies": {
-    "@coderbox/atoms": "^1.0.5",
+    "@coderbox/atoms": "^1.0.8",
     "loadash": "^0.0.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "styled-components": "^2.1.2",
     "styled-theme": "^0.3.3",
-    "styled-utils": "^1.1.24"
+    "styled-utils": "^1.1.28"
   }
 }

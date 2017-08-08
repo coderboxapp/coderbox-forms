@@ -29,7 +29,7 @@ export const Dropdown = styled.div`
     margin: -1px 0 0 0;
   }
 
-  & .icon {
+  & > .icon {
     position: absolute;
     top: 0;
     right: 0;
@@ -40,6 +40,7 @@ export const Dropdown = styled.div`
 
   & .input {
     padding-right: 2.25em;
+    color: #000;
   }
 
   & label {

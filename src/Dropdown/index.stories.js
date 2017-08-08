@@ -1,20 +1,20 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import Box from '../Box'
+import { Box } from '@coderbox/atoms'
 import Dropdown from '.'
 
-const states = [
-  {value: 'AL', text: 'Alabama'},
-  {value: 'IL', text: 'Chicago'},
-  {value: 'WS', text: 'Washinton'}
+const labels = [
+  {value: '1', text: 'Important', icon: 'dot-circle-o'},
+  {value: '2', text: 'Normal', icon: 'circle-o'},
+  {value: '3', text: 'Low', icon: 'circle'}
 ]
 
 storiesOf('Dropdown', module)
   .add('default', () => {
     return (
       <Box withSpace='0.5rem'>
-        <Dropdown isSize='small' options={states} placeholder='Select state' />
-        <Dropdown isSize='normal' options={states} placeholder='Select state' isSearch />
+        <Dropdown isSize='small' isColor='primary' items={labels} placeholder='Select importance' />
+        <Dropdown isSize='normal' items={labels} placeholder='Select importance' isSearch />
       </Box>
     )
   })

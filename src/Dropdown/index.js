@@ -9,11 +9,15 @@ import Input from 'Input'
 
 class Dropdown extends React.Component {
   state = {
-    open: false
+    open: false,
+    searchQuery: null,
+    selectedItem: null,
+    selectedIndex: 0
   }
 
   static defaultProps = {
-    isColor: 'light',
+    items: [],
+    isColor: 'gray',
     isSearch: false,
     isTone: 0
   }
@@ -34,6 +38,21 @@ class Dropdown extends React.Component {
     this.setState({ open: false })
   }
 
+  setSearchQuery = (searchQuery) => {
+    this.setState({ searchQuery })
+  }
+
+  selectItem = (item) => {
+    this.setState({
+      selectedItem: item,
+      searchQuery: null
+    })
+  }
+
+  clearSearchQuery = () => {
+    this.setState({ searchQuery: '' })
+  }
+
   handleClickOutside = (evt) => {
     const domNode = ReactDOM.findDOMNode(this)
     if ((!domNode || !domNode.contains(evt.target))) {
@@ -43,6 +62,18 @@ class Dropdown extends React.Component {
 
   toggle = evt => {
     this.state.open ? this.close(evt) : this.open(evt)
+  }
+
+  getItems = () => {
+    const { items } = this.props
+    const { searchQuery } = this.state
+    if (!searchQuery) return items
+
+    return items.filter(i => i.text.toLowerCase().search(searchQuery.toLowerCase()) > -1)
+  }
+
+  handleSearch = (evt) => {
+    this.setSearchQuery(evt.target.value)
   }
 
   handleClick = (evt) => {
@@ -55,10 +86,21 @@ class Dropdown extends React.Component {
     search && search.focus()
   }
 
+  handleItemClick = (item, index) => {
+    let { onChange } = this.props
+
+    if (onChange) onChange(item)
+
+    this.selectItem(item)
+    this.close()
+  }
+
   render () {
-    const { options, isSearch, placeholder, ...rest } = this.props
-    const { open } = this.state
+    const { isSearch, placeholder, ...rest } = this.props
+    const { open, selectedItem, searchQuery } = this.state
     const className = cx(`dropdown`, rest.className)
+    const items = this.getItems()
+    const itemText = selectedItem ? selectedItem.text : ''
 
     return (
       <styles.Dropdown
@@ -67,11 +109,20 @@ class Dropdown extends React.Component {
         onClick={this.handleClick}
         className={className}>
 
-        <Input ref='search' placeholder={placeholder} disabled={!isSearch} />
+        <Input
+          ref='search'
+          isColor={rest.isColor}
+          value={searchQuery !== null ? searchQuery : itemText}
+          onChange={this.handleSearch}
+          placeholder={placeholder}
+          disabled={!isSearch} />
+
         <Icon name='caret-down' />
         <Menu
-          items={options}
+          items={items}
+          selected={selectedItem}
           isHidden={!open}
+          onItemClick={this.handleItemClick}
           isColor={rest.isColor} />
 
       </styles.Dropdown>

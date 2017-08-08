@@ -1,14 +1,18 @@
 import styled, { css } from 'styled-components'
-import { isSize } from 'styled-utils'
+import { rgba } from 'polished'
+import { isSize, isColor, isOutlined, colors } from 'styled-utils'
 
-const isDisabled = ({ isDisabled }) => {
-  if (!isDisabled) return
+const override = p => {
+  if (!p.isColor) return
 
+  let { bgColor, textColor } = colors(p)
+  let isInverted = !p.isOutlined
+  console.log(isInverted)
   return css`
-    background-color: whitesmoke;
-    border-color: whitesmoke;
-    box-shadow: none;
-    color: #7a7a7a;
+    border-color: ${isInverted ? 'transparent' : bgColor};
+    &::placeholder {
+      color: ${isInverted ? textColor : rgba(bgColor, 0.5)};
+    }
   `
 }
 
@@ -18,10 +22,9 @@ export const Input = styled.input`
   background: white;
   margin: 0;
   outline: 0;
-  padding: 0 0.65rem;
-  border: 1px solid;
+  padding: 0 0.55rem;
+  border: 1px solid #dbdbdb;
   border-radius: 3px;
-  border-color: ${(p) => p.theme.palettes[p.isColor][p.isTone]};
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
@@ -31,8 +34,10 @@ export const Input = styled.input`
   line-height: 1.5;
   box-sizing: border-box;
   appearance: none;
-  box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
+  box-shadow: inset 0 1px 1px rgba(10, 10, 10, 0.1);
 
-  ${isDisabled}
   ${isSize}
+  ${isColor}
+  ${isOutlined}
+  ${override}
 `

@@ -1,11 +1,11 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { Icon, Button } from '@coderbox/atoms'
-import Box from '../Box'
-import Input from '../Input'
-import Control from '../Control'
+import { Box, Icon, Button } from '@coderbox/atoms'
+
+import Input from 'Input'
+import Control from 'Control'
+import FieldGroup from 'FieldGroup'
 import Field from '.'
-import FieldGroup from '../FieldGroup'
 
 storiesOf('Field', module)
   .add('simple usage', () => {

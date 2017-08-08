@@ -1,24 +1,23 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { Icon, Button } from '@coderbox/atoms'
+import { Box, Icon, Button } from '@coderbox/atoms'
+import ControlGroup from 'ControlGroup'
+import Input from 'Input'
 import Control from '.'
-import ControlGroup from '../ControlGroup'
-import Box from '../Box'
-import Input from '../Input'
 
 storiesOf('Control', module)
   .add('simple usage', () => {
     return (
       <Box withSpace='0.5rem'>
         <Control hasIcons>
-          <Input isSize='small' placeholder='Type username here (Size: small)' />
-          <Icon isSize='small' name='user' className='left' />
-          <Icon isSize='small' name='check' isColor='success' className='right' />
+          <Input placeholder='Type username here (default)' />
+          <Icon name='user' className='left' />
+          <Icon isColor='success' name='check' className='right' />
         </Control>
-        <Control hasIcons>
-          <Input isColor='danger' placeholder='Type password (Size: normal)' type='password' />
+        <Control isColor='danger' hasIcons>
+          <Input isColor='danger' placeholder='Type password (danger)' type='password' />
           <Icon name='unlock' className='left' />
-          <Icon name='warning' isColor='danger' className='right' />
+          <Icon isColor='danger' isTone={2} name='warning' className='right' />
         </Control>
         <Button isColor='primary'>Login</Button>
       </Box>
@@ -29,21 +28,21 @@ storiesOf('Control', module)
       <Box withSpace='0.5rem'>
         <ControlGroup>
           <Control>
-            <Button isStatic isColor='light' isPaddingless>
-              <Icon name='unlock' isColor='gray' />
+            <Button isStatic isColor='gray' isIcon>
+              <Icon name='unlock' />
             </Button>
           </Control>
           <Control>
             <Input placeholder='Your password' type='password' />
           </Control>
           <Control>
-            <Button isStatic isColor='light'>@gmail.com</Button>
+            <Button isStatic isColor='gray'>@gmail.com</Button>
           </Control>
         </ControlGroup>
         <ControlGroup>
           <Control>
-            <Button isStatic isColor='success' isPaddingless>
-              <Icon name='unlock' isColor='white' />
+            <Button isStatic isColor='success' isIcon>
+              <Icon name='unlock' />
             </Button>
           </Control>
           <Control>

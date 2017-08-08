@@ -5,9 +5,7 @@ import * as styles from './styles'
 class Input extends React.Component {
   static defaultProps = {
     type: 'text',
-    isSize: 'normal',
-    isColor: 'light',
-    isTone: 0
+    isSize: 'normal'
   }
 
   focus = () => {
@@ -19,15 +17,16 @@ class Input extends React.Component {
   }
 
   render () {
-    const { type, readonly, ...props } = this.props
+    const { type, readonly, isInverted, ...props } = this.props
     const className = cx(`input`, props.className)
 
     return (
       <styles.Input
         innerRef={this.handleRef}
         {...props}
+        isOutlined={!isInverted}
+        isInverted={false}
         type={type}
-        readonly={readonly}
         className={className} />
     )
   }
