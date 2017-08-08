@@ -4,7 +4,7 @@ const hasIcons = ({ hasIcons }) => {
   if (!hasIcons) return
 
   return css`
-    & .icon {
+    & > .icon {
       position: absolute;
       width: 2.25em;
       height: 2.25em;
@@ -12,11 +12,11 @@ const hasIcons = ({ hasIcons }) => {
       z-index: 4;
     }
 
-    & .icon.left{
+    & > .icon.left{
       left: 0;
     }
 
-    & .icon.right{
+    & > .icon.right{
       right: 0;
     }
 

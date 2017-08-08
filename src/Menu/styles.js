@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
 import { isSize, isColor, isHidden, isHover } from 'styled-utils'
 
-const isSelected = ({ isSelected }) => {
-  if (!isSelected) return
+const override = ({ isColor }) => {
+  if (isColor) return
   return css`
     background-color: #efefef;
   `
@@ -18,6 +18,7 @@ export const Menu = styled.div`
   border: 1px solid;
   border-color: ${p => p.isColor ? p.theme.palettes[p.isColor][p.isTone || 0] : '#dbdbdb'};
   border-radius: 3px;
+  color: #000;
 
   ${isSize}
   ${isHidden}
@@ -58,4 +59,5 @@ export const MenuItem = styled.div`
 
   ${isColor}
   ${isHover}
+  ${override}
 `

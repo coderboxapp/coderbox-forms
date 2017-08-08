@@ -1,4 +1,5 @@
 import React from 'react'
+import { withTheme } from 'utils'
 import { storiesOf } from '@storybook/react'
 import { Box, Icon, Button } from '@coderbox/atoms'
 
@@ -8,7 +9,7 @@ import FieldGroup from 'FieldGroup'
 import Field from '.'
 
 storiesOf('Field', module)
-  .add('simple usage', () => {
+  .add('simple usage', withTheme(() => {
     return (
       <Box>
         <Field label='Email:'>
@@ -29,8 +30,8 @@ storiesOf('Field', module)
         <Button isColor='primary'>Login</Button>
       </Box>
     )
-  })
-  .add('group', () => {
+  }))
+  .add('group', withTheme(() => {
     return (
       <Box>
         <FieldGroup>
@@ -56,4 +57,4 @@ storiesOf('Field', module)
         </Button>
       </Box>
     )
-  })
+  }))

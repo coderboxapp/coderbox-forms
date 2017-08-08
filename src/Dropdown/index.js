@@ -9,6 +9,7 @@ import Input from 'Input'
 
 const Keys = {
   ENTER: 13,
+  ESC: 27,
   BACKSPACE: 8,
   UP_ARROW: 38,
   DOWN_ARROW: 40
@@ -18,7 +19,6 @@ class Dropdown extends React.Component {
   state = {
     open: false,
     searchQuery: null,
-    selectedItem: null,
     selectedIndex: 0
   }
 
@@ -58,15 +58,13 @@ class Dropdown extends React.Component {
     this.setState({ searchQuery })
   }
 
-  selectItem = (item) => {
-    this.setState({
-      selectedItem: item,
-      searchQuery: null
-    })
-  }
+  selectItemByIndex = (index, resetSearch) => {
+    let newState = { selectedIndex: index }
+    if (resetSearch) {
+      newState.searchQuery = null
+    }
 
-  selectItemByIndex = (index) => {
-
+    this.setState(newState)
   }
 
   clearSearchQuery = () => {
@@ -74,17 +72,36 @@ class Dropdown extends React.Component {
   }
 
   handleKeyDown = (evt) => {
-    const moves = {
-      [Keys.UP_ARROW]: 1,
-      [Keys.DOWN_ARROW]: -1
+    let { selectedIndex } = this.state
+    let moves = {
+      [Keys.UP_ARROW]: -1,
+      [Keys.DOWN_ARROW]: 1
+    }
+
+    if (evt.keyCode === Keys.ESC) {
+      this.close()
+      return
+    }
+
+    if (evt.keyCode === Keys.ENTER) {
+      let item = this.getItems()[selectedIndex]
+
+      this.selectItemByIndex(this.getItemIndex(item), true)
+      this.close()
+      return
     }
 
     let move = moves[evt.keyCode]
-    let { selectedIndex } = this.state
-
     if (move === undefined) return
 
-    selectedIndex += move
+    evt.stopPropagation()
+    evt.preventDefault()
+
+    let lastIndex = this.getItems().length
+
+    selectedIndex = (selectedIndex + move) % lastIndex
+    if (selectedIndex < 0) selectedIndex = lastIndex - 1
+
     this.selectItemByIndex(selectedIndex)
   }
 
@@ -107,8 +124,30 @@ class Dropdown extends React.Component {
     return items.filter((i) => i.text.toLowerCase().search(searchQuery.toLowerCase()) > -1)
   }
 
+  getItemIndex = (item) => {
+    let items = this.props.items
+    let index = 0
+
+    for (index = 0; index < items.length; index++) {
+      if (item.value === items[index].value) {
+        return index
+      }
+    }
+
+    return -1
+  }
+
   handleSearch = (evt) => {
-    this.setSearchQuery(evt.target.value)
+    const { open, searchQuery } = this.state
+
+    if (searchQuery !== evt.target.value) {
+      this.setSearchQuery(evt.target.value)
+      this.setState({ selectedIndex: 0 })
+
+      if (!open) {
+        this.open()
+      }
+    }
   }
 
   handleClick = (evt) => {
@@ -121,20 +160,21 @@ class Dropdown extends React.Component {
     search && search.focus()
   }
 
-  handleItemClick = (item, index) => {
+  handleItemClick = (item) => {
     let { onChange } = this.props
 
     if (onChange) onChange(item)
 
-    this.selectItem(item)
+    this.selectItemByIndex(this.getItemIndex(item), true)
     this.close()
   }
 
   render () {
     const { isSearch, placeholder, ...rest } = this.props
-    const { open, selectedItem, searchQuery } = this.state
+    const { open, selectedIndex, searchQuery } = this.state
     const className = cx(`dropdown`, rest.className)
     const items = this.getItems()
+    const selectedItem = items[selectedIndex]
     const itemText = selectedItem ? selectedItem.text : ''
 
     return (

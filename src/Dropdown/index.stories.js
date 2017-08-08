@@ -7,13 +7,13 @@ import Dropdown from '.'
 const labels = [
   {value: '1', text: 'Important', icon: 'dot-circle-o'},
   {value: '2', text: 'Normal', icon: 'circle-o'},
-  {value: '3', text: 'Low', icon: 'circle'}
+  {value: '3', text: 'Low', icon: 'star'}
 ]
 
 storiesOf('Dropdown', module)
   .add('default', withTheme(() => (
     <Box withSpace='0.5rem'>
-      <Dropdown isColor='primary' items={labels} placeholder='Select importance' />
-      <Dropdown items={labels} placeholder='Select importance' isSearch />
+      <Dropdown items={labels} placeholder='Select importance' />
+      <Dropdown items={labels} isColor='primary' placeholder='Select importance' isSearch />
     </Box>
   )))

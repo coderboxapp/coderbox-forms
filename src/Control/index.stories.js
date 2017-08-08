@@ -1,12 +1,20 @@
 import React from 'react'
+import { withTheme } from 'utils'
 import { storiesOf } from '@storybook/react'
 import { Box, Icon, Button } from '@coderbox/atoms'
 import ControlGroup from 'ControlGroup'
 import Input from 'Input'
+import Dropdown from 'Dropdown'
 import Control from '.'
 
+const labels = [
+  {value: '1', text: 'A', icon: 'dot-circle-o'},
+  {value: '2', text: 'B', icon: 'circle-o'},
+  {value: '3', text: 'C', icon: 'star'}
+]
+
 storiesOf('Control', module)
-  .add('simple usage', () => {
+  .add('simple usage', withTheme(() => {
     return (
       <Box withSpace='0.5rem'>
         <Control hasIcons>
@@ -19,11 +27,15 @@ storiesOf('Control', module)
           <Icon name='unlock' className='left' />
           <Icon isColor='danger' isTone={2} name='warning' className='right' />
         </Control>
+        <Control hasIcons>
+          <Dropdown items={labels} isSearch placeholder='Select importance' />
+          <Icon name='star' className='left' />
+        </Control>
         <Button isColor='primary'>Login</Button>
       </Box>
     )
-  })
-  .add('group', () => {
+  }))
+  .add('group', withTheme(() => {
     return (
       <Box withSpace='0.5rem'>
         <ControlGroup>
@@ -31,6 +43,9 @@ storiesOf('Control', module)
             <Button isStatic isColor='gray' isIcon>
               <Icon name='unlock' />
             </Button>
+          </Control>
+          <Control>
+            <Dropdown items={labels} placeholder='Select importance' />
           </Control>
           <Control>
             <Input placeholder='Your password' type='password' />
@@ -54,4 +69,4 @@ storiesOf('Control', module)
         </ControlGroup>
       </Box>
     )
-  })
+  }))

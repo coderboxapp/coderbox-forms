@@ -1,10 +1,11 @@
 import React from 'react'
+import { withTheme } from 'utils'
 import { storiesOf } from '@storybook/react'
 import { Box } from '@coderbox/atoms'
 import Input from '.'
 
 storiesOf('Input', module)
-  .add('simple usage', () => {
+  .add('simple usage', withTheme(() => {
     return (
       <div>
         <Box withSpace='0.5rem'>
@@ -18,8 +19,8 @@ storiesOf('Input', module)
         </Box>
       </div>
     )
-  })
-  .add('with colors', () => {
+  }))
+  .add('with colors', withTheme(() => {
     return (
       <Box withSpace='0.5rem'>
         <Input placeholder='Type username here' isColor='primary' isTone={0} isInverted />
@@ -29,4 +30,4 @@ storiesOf('Input', module)
         <Input placeholder='Type username here' isColor='black' />
       </Box>
     )
-  })
+  }))
