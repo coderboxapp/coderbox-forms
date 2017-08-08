@@ -1,4 +1,5 @@
 import React from 'react'
+import { withTheme } from 'utils'
 import { storiesOf } from '@storybook/react'
 import { Box } from '@coderbox/atoms'
 import Dropdown from '.'
@@ -10,11 +11,9 @@ const labels = [
 ]
 
 storiesOf('Dropdown', module)
-  .add('default', () => {
-    return (
-      <Box withSpace='0.5rem'>
-        <Dropdown isSize='small' isColor='primary' items={labels} placeholder='Select importance' />
-        <Dropdown isSize='normal' items={labels} placeholder='Select importance' isSearch />
-      </Box>
-    )
-  })
+  .add('default', withTheme(() => (
+    <Box withSpace='0.5rem'>
+      <Dropdown isColor='primary' items={labels} placeholder='Select importance' />
+      <Dropdown items={labels} placeholder='Select importance' isSearch />
+    </Box>
+  )))

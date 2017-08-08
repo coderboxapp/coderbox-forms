@@ -31,9 +31,8 @@ For code example check `.stories.js` files from each component.
 - [x] Control
 - [x] ControlGroup
 - [x] Input
-- [x] Select
-- [ ] Autocomplete
 - [ ] Checkbox
+- [x] Dropdown
 - [ ] Textarea
 
 # Build

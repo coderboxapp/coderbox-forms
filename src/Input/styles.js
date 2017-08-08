@@ -7,7 +7,7 @@ const override = p => {
 
   let { bgColor, textColor } = colors(p)
   let isInverted = !p.isOutlined
-  console.log(isInverted)
+
   return css`
     border-color: ${isInverted ? 'transparent' : bgColor};
     &::placeholder {

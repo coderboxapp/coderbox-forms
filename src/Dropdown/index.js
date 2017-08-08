@@ -7,6 +7,13 @@ import * as styles from './styles'
 import Menu from 'Menu'
 import Input from 'Input'
 
+const Keys = {
+  ENTER: 13,
+  BACKSPACE: 8,
+  UP_ARROW: 38,
+  DOWN_ARROW: 40
+}
+
 class Dropdown extends React.Component {
   state = {
     open: false,
@@ -17,17 +24,26 @@ class Dropdown extends React.Component {
 
   static defaultProps = {
     items: [],
-    isColor: 'gray',
     isSearch: false,
     isTone: 0
   }
 
   componentDidMount () {
-    document.addEventListener('click', this.handleClickOutside, true)
   }
 
   componentWillUnmount () {
-    document.removeEventListener('click', this.handleClickOutside, true)
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    let { open } = this.state
+
+    if (open) {
+      document.addEventListener('keydown', this.handleKeyDown)
+      document.addEventListener('click', this.handleClickOutside, true)
+    } else {
+      document.removeEventListener('keydown', this.handleKeyDown)
+      document.removeEventListener('click', this.handleClickOutside, true)
+    }
   }
 
   open = (evt) => {
@@ -49,18 +65,37 @@ class Dropdown extends React.Component {
     })
   }
 
+  selectItemByIndex = (index) => {
+
+  }
+
   clearSearchQuery = () => {
     this.setState({ searchQuery: '' })
   }
 
+  handleKeyDown = (evt) => {
+    const moves = {
+      [Keys.UP_ARROW]: 1,
+      [Keys.DOWN_ARROW]: -1
+    }
+
+    let move = moves[evt.keyCode]
+    let { selectedIndex } = this.state
+
+    if (move === undefined) return
+
+    selectedIndex += move
+    this.selectItemByIndex(selectedIndex)
+  }
+
   handleClickOutside = (evt) => {
     const domNode = ReactDOM.findDOMNode(this)
-    if ((!domNode || !domNode.contains(evt.target))) {
+    if (!domNode || !domNode.contains(evt.target)) {
       this.close()
     }
   }
 
-  toggle = evt => {
+  toggle = (evt) => {
     this.state.open ? this.close(evt) : this.open(evt)
   }
 
@@ -69,7 +104,7 @@ class Dropdown extends React.Component {
     const { searchQuery } = this.state
     if (!searchQuery) return items
 
-    return items.filter(i => i.text.toLowerCase().search(searchQuery.toLowerCase()) > -1)
+    return items.filter((i) => i.text.toLowerCase().search(searchQuery.toLowerCase()) > -1)
   }
 
   handleSearch = (evt) => {
@@ -103,19 +138,16 @@ class Dropdown extends React.Component {
     const itemText = selectedItem ? selectedItem.text : ''
 
     return (
-      <styles.Dropdown
-        {...rest}
-        isOpen={open}
-        onClick={this.handleClick}
-        className={className}>
-
+      <styles.Dropdown {...rest} isOpen={open} onClick={this.handleClick} className={className}>
         <Input
           ref='search'
           isColor={rest.isColor}
+          isTone={rest.isTone}
           value={searchQuery !== null ? searchQuery : itemText}
           onChange={this.handleSearch}
           placeholder={placeholder}
-          disabled={!isSearch} />
+          disabled={!isSearch}
+        />
 
         <Icon name='caret-down' />
         <Menu
@@ -123,8 +155,9 @@ class Dropdown extends React.Component {
           selected={selectedItem}
           isHidden={!open}
           onItemClick={this.handleItemClick}
-          isColor={rest.isColor} />
-
+          isColor={rest.isColor}
+          isTone={rest.isTone}
+        />
       </styles.Dropdown>
     )
   }

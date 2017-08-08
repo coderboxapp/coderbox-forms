@@ -24,9 +24,15 @@ export const Dropdown = styled.div`
     position: absolute;
     top: 100%;
     left: 0;
-    border-radius: 0 0 3px 3px;
-    border-top: 1px solid #efefef !important;
     margin: -1px 0 0 0;
+    border-radius: 0 0 3px 3px;
+    border-top: 0 solid;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+    & .menu-item:first-child {
+      border-radius: 0;
+      border-top: 1px solid #efefef;
+    }
   }
 
   & > .icon {
@@ -40,11 +46,9 @@ export const Dropdown = styled.div`
 
   & .input {
     padding-right: 2.25em;
+    box-shadow: none;
     color: #000;
   }
 
-  & label {
-
-  }
   ${isOpen}
 `
