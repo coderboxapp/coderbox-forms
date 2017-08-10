@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components'
 import { rgba } from 'polished'
-import { isSize, isColor, isOutlined, colors } from 'styled-utils'
+import { withSize, withColor, isOutlined, colors } from 'styled-utils'
 
 const override = p => {
-  if (!p.isColor) return
+  if (!p.withColor) return
 
   let { bgColor, textColor } = colors(p)
   let isInverted = !p.isOutlined
@@ -30,14 +30,14 @@ export const Input = styled.input`
   justify-content: flex-start;
   max-width: 100%;
   width: 100%;
-  height: 2.25em;
+  height: 2.20em;
   line-height: 1.5;
   box-sizing: border-box;
   appearance: none;
   box-shadow: inset 0 1px 1px rgba(10, 10, 10, 0.1);
 
-  ${isSize}
-  ${isColor}
+  ${withSize}
+  ${withColor}
   ${isOutlined}
   ${override}
 `

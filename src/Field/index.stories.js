@@ -16,18 +16,18 @@ storiesOf('Field', module)
           <Control hasIcons>
             <Input placeholder='Type username here' />
             <Icon name='user' className='left' />
-            <Icon name='check' isColor='success' className='right' />
+            <Icon name='check' withColor='success' className='right' />
           </Control>
         </Field>
 
         <Field label='Password:'>
           <Control hasIcons>
-            <Input isColor='danger' placeholder='Your password' type='password' />
+            <Input withColor='danger' placeholder='Your password' type='password' />
             <Icon name='unlock' className='left' />
-            <Icon name='warning' isColor='danger' className='right' />
+            <Icon name='warning' withColor='danger' className='right' />
           </Control>
         </Field>
-        <Button isColor='primary'>Login</Button>
+        <Button withColor='primary'>Login</Button>
       </Box>
     )
   }))
@@ -39,20 +39,20 @@ storiesOf('Field', module)
             <Control hasIcons>
               <Input placeholder='Type username here' />
               <Icon name='user' className='left' />
-              <Icon name='check' isColor='success' className='right' />
+              <Icon name='check' withColor='success' className='right' />
             </Control>
           </Field>
 
           <Field label='Password:'>
             <Control hasIcons>
-              <Input isColor='danger' placeholder='Your password' type='password' />
-              <Icon name='unlock' className='left' />
-              <Icon name='warning' isColor='danger' className='right' />
+              <Input withColor='danger' isInverted placeholder='Your password' type='password' />
+              <Icon name='unlock' className='left' withColor='white' />
+              <Icon name='warning' withColor='white' className='right' />
             </Control>
           </Field>
         </FieldGroup>
-        <Button isColor='primary'>
-          <Icon name='lock' isColor='white' />
+        <Button withColor='primary'>
+          <Icon name='lock' withColor='white' />
           Login
         </Button>
       </Box>

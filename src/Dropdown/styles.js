@@ -16,7 +16,6 @@ export const Dropdown = styled.div`
   width: 100%;
   cursor: pointer;
   position: relative;
-  min-height: 2.25em;
   display: inline-flex;
   align-items: center;
 
@@ -28,6 +27,7 @@ export const Dropdown = styled.div`
     border-radius: 0 0 3px 3px;
     border-top: 0 solid;
     box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+    z-index: 10;
 
     & .menu-item:first-child {
       border-radius: 0;
@@ -35,19 +35,14 @@ export const Dropdown = styled.div`
     }
   }
 
-  & > .icon {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 2.25em;
-    height: 2.25em;
-    cursor: pointer;
-  }
-
   & .input {
-    padding-right: 2.25em;
+    padding-right: 2.20em;
     box-shadow: none;
     color: #000;
+  }
+
+  & > .control {
+    width: 100%;
   }
 
   ${isOpen}

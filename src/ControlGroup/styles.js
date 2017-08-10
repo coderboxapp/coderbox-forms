@@ -4,11 +4,7 @@ export const ControlGroup = styled.div`
   display: flex;
   flex-direction: row;
 
-  & .control:not(:last-child) {
-    margin-right: -1px;
-  }
-
-  & .control {
+  & > .control {
     & .input,
     & .button {
       margin: 0 0 0 0;
@@ -16,17 +12,21 @@ export const ControlGroup = styled.div`
     }
   }
 
-  & .control:first-child {
+  & > .control:first-child {
     & .input,
     & .button {
       border-radius: 3px 0 0 3px;
     }
   }
 
-  & .control:last-child {
+  & > .control:last-child {
     & .input,
     & .button {
       border-radius: 0 3px 3px 0;
     }
+  }
+
+  & > .control:not(:last-child) {
+    margin-right: -1px;
   }
 `

@@ -5,7 +5,7 @@ import * as styles from './styles'
 class Input extends React.Component {
   static defaultProps = {
     type: 'text',
-    isSize: 'normal'
+    withSize: 'normal'
   }
 
   focus = () => {

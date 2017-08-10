@@ -6,6 +6,7 @@ import * as styles from './styles'
 
 import Menu from 'Menu'
 import Input from 'Input'
+import Control from 'Control'
 
 const Keys = {
   ENTER: 13,
@@ -19,19 +20,20 @@ class Dropdown extends React.Component {
   state = {
     open: false,
     searchQuery: null,
-    selectedIndex: 0
+    selectedIndex: 0,
+    value: null
   }
 
   static defaultProps = {
     items: [],
     isSearch: false,
-    isTone: 0
+    withTone: 0
   }
 
-  componentDidMount () {
-  }
-
-  componentWillUnmount () {
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.value) {
+      this.setValue(nextProps.value)
+    }
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -54,26 +56,63 @@ class Dropdown extends React.Component {
     this.setState({ open: false })
   }
 
+  toggle = (evt) => {
+    this.state.open ? this.close(evt) : this.open(evt)
+  }
+
   setSearchQuery = (searchQuery) => {
     this.setState({ searchQuery })
   }
 
-  selectItemByIndex = (index, resetSearch) => {
-    let newState = { selectedIndex: index }
-    if (resetSearch) {
-      newState.searchQuery = null
-    }
-
-    this.setState(newState)
+  clearSearchQuery = () => {
+    this.setState({ searchQuery: null })
   }
 
-  clearSearchQuery = () => {
-    this.setState({ searchQuery: '' })
+  setValue = (value) => {
+    let { onChange } = this.props
+    let selectedIndex = this.getItemIndex(value)
+
+    if (onChange) onChange(value)
+
+    this.setState({ value, selectedIndex })
+  }
+
+  moveIndex = (value) => {
+    let items = this.getFilteredItems()
+    let lastIndex = items.length
+    let selectedIndex = this.state.selectedIndex
+
+    selectedIndex = (selectedIndex + value) % lastIndex
+    if (selectedIndex < 0) selectedIndex = lastIndex - 1
+
+    this.setValue(items[selectedIndex])
+  }
+
+  getFilteredItems = () => {
+    const { items } = this.props
+    const { searchQuery } = this.state
+    if (!searchQuery) return items
+
+    return items.filter((i) => i.text.toLowerCase().search(searchQuery.toLowerCase()) > -1)
+  }
+
+  getItemIndex = (item) => {
+    if (!item) return 0
+
+    let items = this.props.items
+    let index = 0
+
+    for (index = 0; index < items.length; index++) {
+      if (item.value === items[index].value) {
+        return index
+      }
+    }
+
+    return 0
   }
 
   handleKeyDown = (evt) => {
-    let { selectedIndex } = this.state
-    let moves = {
+    const moves = {
       [Keys.UP_ARROW]: -1,
       [Keys.DOWN_ARROW]: 1
     }
@@ -84,9 +123,7 @@ class Dropdown extends React.Component {
     }
 
     if (evt.keyCode === Keys.ENTER) {
-      let item = this.getItems()[selectedIndex]
-
-      this.selectItemByIndex(this.getItemIndex(item), true)
+      this.clearSearchQuery()
       this.close()
       return
     }
@@ -97,12 +134,7 @@ class Dropdown extends React.Component {
     evt.stopPropagation()
     evt.preventDefault()
 
-    let lastIndex = this.getItems().length
-
-    selectedIndex = (selectedIndex + move) % lastIndex
-    if (selectedIndex < 0) selectedIndex = lastIndex - 1
-
-    this.selectItemByIndex(selectedIndex)
+    this.moveIndex(move)
   }
 
   handleClickOutside = (evt) => {
@@ -112,37 +144,12 @@ class Dropdown extends React.Component {
     }
   }
 
-  toggle = (evt) => {
-    this.state.open ? this.close(evt) : this.open(evt)
-  }
-
-  getItems = () => {
-    const { items } = this.props
-    const { searchQuery } = this.state
-    if (!searchQuery) return items
-
-    return items.filter((i) => i.text.toLowerCase().search(searchQuery.toLowerCase()) > -1)
-  }
-
-  getItemIndex = (item) => {
-    let items = this.props.items
-    let index = 0
-
-    for (index = 0; index < items.length; index++) {
-      if (item.value === items[index].value) {
-        return index
-      }
-    }
-
-    return -1
-  }
-
   handleSearch = (evt) => {
     const { open, searchQuery } = this.state
 
     if (searchQuery !== evt.target.value) {
       this.setSearchQuery(evt.target.value)
-      this.setState({ selectedIndex: 0 })
+      this.setState({ selectedIndex: -1, value: null })
 
       if (!open) {
         this.open()
@@ -161,42 +168,47 @@ class Dropdown extends React.Component {
   }
 
   handleItemClick = (item) => {
-    let { onChange } = this.props
-
-    if (onChange) onChange(item)
-
-    this.selectItemByIndex(this.getItemIndex(item), true)
+    this.setValue(item)
+    this.clearSearchQuery()
     this.close()
   }
 
   render () {
-    const { isSearch, placeholder, ...rest } = this.props
-    const { open, selectedIndex, searchQuery } = this.state
+    const { isSearch, placeholder, onChange, ...rest } = this.props
+    const { open, value, searchQuery } = this.state
     const className = cx(`dropdown`, rest.className)
-    const items = this.getItems()
-    const selectedItem = items[selectedIndex]
-    const itemText = selectedItem ? selectedItem.text : ''
+
+    const items = this.getFilteredItems()
+    const itemText = value ? value.text : ''
+    const itemIcon = value && searchQuery === null ? value.icon : null
 
     return (
-      <styles.Dropdown {...rest} isOpen={open} onClick={this.handleClick} className={className}>
-        <Input
-          ref='search'
-          isColor={rest.isColor}
-          isTone={rest.isTone}
-          value={searchQuery !== null ? searchQuery : itemText}
-          onChange={this.handleSearch}
-          placeholder={placeholder}
-          disabled={!isSearch}
-        />
+      <styles.Dropdown
+        isOpen={open}
+        onClick={this.handleClick}
+        className={className}>
 
-        <Icon name='caret-down' />
+        <Control hasLeftIcon={itemIcon} hasRightIcon>
+          <Input
+            {...rest}
+            ref='search'
+            value={searchQuery !== null ? searchQuery : itemText}
+            onChange={this.handleSearch}
+            placeholder={placeholder}
+            disabled={!isSearch}
+          />
+          {itemIcon && <Icon withSize={rest.withSize} name={itemIcon} className='left' />}
+          <Icon name='caret-down' withSize={rest.withSize} className='right' />
+        </Control>
+
         <Menu
           items={items}
-          selected={selectedItem}
+          selected={value}
           isHidden={!open}
           onItemClick={this.handleItemClick}
-          isColor={rest.isColor}
-          isTone={rest.isTone}
+          withSize={rest.withSize}
+          withColor={rest.withColor}
+          withTone={rest.withTone}
         />
       </styles.Dropdown>
     )

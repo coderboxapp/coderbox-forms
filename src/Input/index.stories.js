@@ -15,7 +15,7 @@ storiesOf('Input', module)
         <Box withSpace='0.5rem'>
           <div>With different sizes:</div>
           <Input placeholder='Type username here' />
-          <Input placeholder='Type username here' isSize='small' />
+          <Input placeholder='Type username here' withSize='small' />
         </Box>
       </div>
     )
@@ -23,11 +23,11 @@ storiesOf('Input', module)
   .add('with colors', withTheme(() => {
     return (
       <Box withSpace='0.5rem'>
-        <Input placeholder='Type username here' isColor='primary' isTone={0} isInverted />
+        <Input placeholder='Type username here' withColor='primary' isInverted />
         <Input placeholder='Type username here' />
-        <Input placeholder='Type username here' isColor='success' />
-        <Input placeholder='Type username here' isColor='danger' />
-        <Input placeholder='Type username here' isColor='black' />
+        <Input placeholder='Type username here' withColor='success' />
+        <Input placeholder='Type username here' withColor='danger' />
+        <Input placeholder='Type username here' withColor='black' />
       </Box>
     )
   }))

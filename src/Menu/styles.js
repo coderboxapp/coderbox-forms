@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
-import { isSize, isColor, isHidden, isHover } from 'styled-utils'
+import { withSize, withColor, isHidden, withHover } from 'styled-utils'
 
-const override = ({ isColor }) => {
-  if (isColor) return
+const override = ({ withColor }) => {
+  if (withColor) return
   return css`
     background-color: #efefef;
   `
@@ -16,11 +16,11 @@ export const Menu = styled.div`
   box-sizing: border-box;
   z-index: 4;
   border: 1px solid;
-  border-color: ${p => p.isColor ? p.theme.palettes[p.isColor][p.isTone || 0] : '#dbdbdb'};
+  border-color: ${p => p.withColor ? p.theme.palettes[p.withColor][p.withTone || 0] : '#dbdbdb'};
   border-radius: 3px;
   color: #000;
 
-  ${isSize}
+  ${withSize}
   ${isHidden}
 `
 
@@ -29,11 +29,11 @@ export const MenuItem = styled.div`
   font-size: inherit;
   font-weight: ${p => p.isSelected ? 'bold' : 'normal'};
   width: 100%;
-  height: 2.25em;
+  height: 2.2em;
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 0px 1.0em;
+  padding: ${p => p.hasIcon ? '0px 0.35em' : '0 0.6rem'};
   cursor: pointer;
   outline: none;
   box-sizing: border-box;
@@ -57,7 +57,7 @@ export const MenuItem = styled.div`
     margin: 0 5px 0 0;
   }
 
-  ${isColor}
-  ${isHover}
+  ${withColor}
+  ${withHover}
   ${override}
 `
