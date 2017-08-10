@@ -25,16 +25,12 @@ export const Input = styled.input`
   padding: 0 0.55rem;
   border: 1px solid #dbdbdb;
   border-radius: 3px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
   max-width: 100%;
   width: 100%;
   height: 2.20em;
-  line-height: 1.5;
   box-sizing: border-box;
   appearance: none;
-  box-shadow: inset 0 1px 1px rgba(10, 10, 10, 0.1);
+  box-shadow: inset 0 1px 2px rgba(100, 100, 100, 0.12);
 
   ${withSize}
   ${withColor}

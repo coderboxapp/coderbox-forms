@@ -54,7 +54,7 @@
     "yargs": "^8.0.2"
   },
   "dependencies": {
-    "@coderbox/atoms": "^1.0.10",
+    "@coderbox/atoms": "^1.0.11",
     "loadash": "^0.0.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

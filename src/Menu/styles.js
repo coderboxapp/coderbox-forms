@@ -29,7 +29,7 @@ export const MenuItem = styled.div`
   font-size: inherit;
   font-weight: ${p => p.isSelected ? 'bold' : 'normal'};
   width: 100%;
-  height: 2.2em;
+  height: 2.185em;
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;

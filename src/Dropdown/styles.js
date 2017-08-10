@@ -37,7 +37,6 @@ export const Dropdown = styled.div`
 
   & .input {
     padding-right: 2.20em;
-    box-shadow: none;
     color: #000;
   }
 

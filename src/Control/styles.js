@@ -6,9 +6,12 @@ const hasIcons = ({ hasIcons, hasLeftIcon, hasRightIcon }) => {
   return css`
     & > .icon {
       position: absolute;
+      top: 0px;
       width: 2.20em;
       height: 2.20em;
       pointer-events: none;
+      display: flex;
+      align-items: center;
       z-index: 4;
     }
 

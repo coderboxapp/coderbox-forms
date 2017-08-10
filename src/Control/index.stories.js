@@ -5,6 +5,7 @@ import { Box, Icon, Button } from '@coderbox/atoms'
 import { labels } from 'mockup'
 import Input from 'Input'
 import Dropdown from 'Dropdown'
+import Checkbox from 'Checkbox'
 import Control from '.'
 
 storiesOf('Control', module)
@@ -24,6 +25,7 @@ storiesOf('Control', module)
         <Control>
           <Dropdown items={labels} isSearch placeholder='Select importance' />
         </Control>
+        <Checkbox>Remember me</Checkbox>
         <Button withColor='primary'>Login</Button>
       </Box>
     )
