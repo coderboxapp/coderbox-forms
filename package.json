@@ -1,6 +1,6 @@
 {
   "name": "@coderbox/forms",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "React Components used to build forms.",
   "main": "lib/coderbox-forms.js",
   "scripts": {
@@ -49,13 +49,13 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "standard": "^10.0.3",
-    "webpack": "^3.5.2",
+    "webpack": "^3.5.4",
     "webpack-node-externals": "^1.6.0",
     "yargs": "^8.0.2"
   },
   "dependencies": {
-    "@coderbox/atoms": "^1.0.13",
-    "loadash": "^0.0.1",
+    "@coderbox/atoms": "^1.0.14",
+    "loadash": "^1.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "styled-components": "^2.1.2",

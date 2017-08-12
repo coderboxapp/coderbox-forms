@@ -2,11 +2,11 @@
 # yarn lockfile v1
 
 
-"@coderbox/atoms@^1.0.13":
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/@coderbox/atoms/-/atoms-1.0.13.tgz#ec4a7c7faaa77af4b298856d854d3c8de3ccde30"
+"@coderbox/atoms@^1.0.14":
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/@coderbox/atoms/-/atoms-1.0.14.tgz#5e93538322faf043af87272cc2e016b50df847ca"
   dependencies:
-    loadash "^0.0.1"
+    loadash "^1.0.0"
     react "^15.5.4"
     react-dom "^15.5.4"
     styled-components "^2.1.2"
@@ -3322,9 +3322,9 @@ load-json-file@^2.0.0:
     pify "^2.0.0"
     strip-bom "^3.0.0"
 
-loadash@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/loadash/-/loadash-0.0.1.tgz#7537b44df4ef299b25b3c962109d26e453f8135e"
+loadash@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/loadash/-/loadash-1.0.0.tgz#b92e54d809f3c225f4f9a9cfbaeae5b56de1ca9f"
 
 loader-runner@^2.3.0:
   version "2.3.0"
@@ -5528,9 +5528,9 @@ webpack-sources@^1.0.1:
     webpack-sources "^1.0.1"
     yargs "^8.0.2"
 
-webpack@^3.5.2:
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.5.2.tgz#a9601066e23af3c80f3bf9758fd794ca9778f251"
+webpack@^3.5.4:
+  version "3.5.4"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.5.4.tgz#5583eb263ed27b78b5bd17bfdfb0eb1b1cd1bf81"
   dependencies:
     acorn "^5.0.0"
     acorn-dynamic-import "^2.0.0"
