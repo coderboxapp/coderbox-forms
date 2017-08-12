@@ -1,8 +1,8 @@
 {
   "name": "@coderbox/forms",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "React Components used to build forms.",
-  "main": "lib/coderbox-atoms.js",
+  "main": "lib/coderbox-forms.js",
   "scripts": {
     "prepare": "yarn build",
     "standard": "standard",
