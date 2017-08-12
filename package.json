@@ -1,6 +1,6 @@
 {
   "name": "@coderbox/forms",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "React Components used to build forms.",
   "main": "lib/coderbox-forms.js",
   "scripts": {
@@ -55,7 +55,6 @@
   },
   "dependencies": {
     "@coderbox/atoms": "^1.0.14",
-    "loadash": "^1.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "styled-components": "^2.1.2",
