@@ -8,6 +8,8 @@ const override = ({ withColor }) => {
   `
 }
 
+const radius = p => p.theme.sizes.radius
+
 export const Menu = styled.div`
   font-family: ${p => p.theme.fonts.primary};
   font-weight: normal;
@@ -17,7 +19,7 @@ export const Menu = styled.div`
   z-index: 4;
   border: 1px solid;
   border-color: ${p => p.withColor ? p.theme.palettes[p.withColor][p.withTone || 0] : '#dbdbdb'};
-  border-radius: 3px;
+  border-radius: ${p => radius(p)};
   color: #000;
 
   ${withSize}
@@ -46,11 +48,11 @@ export const MenuItem = styled.div`
   }
 
   &:first-child {
-    border-radius: 3px 3px 0 0;
+    border-radius: ${p => `${radius(p)} ${radius(p)} 0 0`};
   }
   
   &:last-child {
-    border-radius: 0 0 3px 3px;
+    border-radius: ${p => `0 0 ${radius(p)} ${radius(p)}`};
   } 
 
   & .icon {

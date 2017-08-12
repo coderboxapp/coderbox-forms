@@ -7,8 +7,8 @@ const hasIcons = ({ hasIcons, hasLeftIcon, hasRightIcon }) => {
     & > .icon {
       position: absolute;
       top: 0px;
-      width: 2.20em;
-      height: 2.20em;
+      width: ${p => p.theme.sizes.height};;
+      height: ${p => p.theme.sizes.height};;
       pointer-events: none;
       display: flex;
       align-items: center;
@@ -24,8 +24,8 @@ const hasIcons = ({ hasIcons, hasLeftIcon, hasRightIcon }) => {
     }
 
     & .input {
-      ${(hasIcons || hasLeftIcon) && 'padding-left: 2.20em'};
-      ${(hasIcons || hasRightIcon) && 'padding-right: 2.20em'};
+      ${(hasIcons || hasLeftIcon) && css`padding-left: ${p => p.theme.sizes.height}`};
+      ${(hasIcons || hasRightIcon) && css`padding-right: ${p => p.theme.sizes.height}`};
     }
   `
 }

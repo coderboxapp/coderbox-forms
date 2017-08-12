@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components'
 
+const radius = p => p.theme.sizes.radius
+
 const isOpen = ({ isOpen }) => {
   if (!isOpen) return
 
@@ -7,7 +9,7 @@ const isOpen = ({ isOpen }) => {
     box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
 
     & .input {
-      border-radius: 3px 3px 0 0;
+      border-radius: ${p => `${radius(p)} ${radius(p)} 0 0`};
     }
   `
 }
@@ -24,7 +26,7 @@ export const Dropdown = styled.div`
     top: 100%;
     left: 0;
     margin: -1px 0 0 0;
-    border-radius: 0 0 3px 3px;
+    border-radius: ${p => `0 0 ${radius(p)} ${radius(p)}`};
     border-top: 0 solid;
     box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
     z-index: 10;
@@ -36,7 +38,6 @@ export const Dropdown = styled.div`
   }
 
   & .input {
-    padding-right: 2.20em;
     color: #000;
   }
 

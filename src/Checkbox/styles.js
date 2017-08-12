@@ -15,7 +15,7 @@ export const Checkbox = styled.div`
   & > div {
     border: 1px solid;
     border-color: ${p => color(p, '#dbdbdb')};
-    border-radius: 4px;
+    border-radius: ${p => p.theme.sizes.radius};
     margin-right: 0.5em;
     height: 1.165em;
     width: 1.165em;

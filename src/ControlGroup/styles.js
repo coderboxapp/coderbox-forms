@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+const radius = p => p.theme.sizes.radius
+
 export const ControlGroup = styled.div`
   display: flex;
   flex-direction: row;
@@ -11,18 +13,18 @@ export const ControlGroup = styled.div`
       border-radius: 0;
     }
   }
-
+  
   & > .control:first-child {
     & .input,
     & .button {
-      border-radius: 3px 0 0 3px;
+      border-radius: ${p => `${radius(p)} 0 0 ${radius(p)}`};
     }
   }
 
   & > .control:last-child {
     & .input,
     & .button {
-      border-radius: 0 3px 3px 0;
+      border-radius: ${p => `0 ${radius(p)} ${radius(p)} 0`};
     }
   }
 
