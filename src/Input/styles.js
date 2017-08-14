@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { rgba } from 'polished'
-import { withSize, withColor, isOutlined, colors } from 'styled-utils'
+import { withSize, withColor, colors } from 'styled-utils'
 
 const override = p => {
   if (!p.withColor) return
@@ -34,6 +34,5 @@ export const Input = styled.input`
 
   ${withSize}
   ${withColor}
-  ${isOutlined}
   ${override}
 `

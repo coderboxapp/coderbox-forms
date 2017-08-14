@@ -9,7 +9,7 @@ class Input extends React.Component {
   }
 
   focus = () => {
-    setTimeout(() => { 
+    setTimeout(() => {
       this.input.focus()
       this.input.select()
     }, 50)
