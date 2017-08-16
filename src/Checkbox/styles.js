@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { withSize, withDisplay } from 'styled-utils'
 import { darken, rgba } from 'polished'
 
-const color = (p, defaultColor) => p.withColor ? rgba(p.theme.palettes[p.withColor][p.withTone], 0.8) : defaultColor
+const color = (p, defaultColor) => p.color ? rgba(p.theme.palettes[p.color][p.tone], 0.8) : defaultColor
 const colorDark = p => darken(0.2, color(p, '#dbdbdb'))
 
 export const Checkbox = styled.div`

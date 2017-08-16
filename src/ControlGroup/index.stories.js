@@ -15,25 +15,25 @@ storiesOf('ControlGroup', module).add(
       <Box withSpace='0.5rem'>
         <ControlGroup>
           <Control>
-            <Button isStatic withColor='gray' withSize='small' isIcon>
-              <Icon name='star' withSize='small' />
+            <Button isStatic color='gray' size='small' isIcon>
+              <Icon name='star' size='small' />
             </Button>
           </Control>
           <Control withWidth='100px'>
-            <Dropdown items={labels} placeholder='Imp.' withSize='small' />
+            <Dropdown items={labels} placeholder='Imp.' size='small' />
           </Control>
           <Control>
-            <Input placeholder='Your email' type='email' withSize='small' />
+            <Input placeholder='Your email' type='email' size='small' />
           </Control>
           <Control>
-            <Button isStatic withColor='gray' withSize='small'>
+            <Button isStatic color='gray' size='small'>
               @gmail.com
             </Button>
           </Control>
         </ControlGroup>
         <ControlGroup>
           <Control>
-            <Button isStatic withColor='success' isIcon>
+            <Button isStatic color='success' isIcon>
               <Icon name='unlock' />
             </Button>
           </Control>
@@ -41,7 +41,7 @@ storiesOf('ControlGroup', module).add(
             <Input placeholder='Your password' type='password' />
           </Control>
           <Control>
-            <Button isStatic withColor='success'>
+            <Button isStatic color='success'>
               @gmail.com
             </Button>
           </Control>

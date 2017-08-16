@@ -1,14 +1,13 @@
 import styled, { css } from 'styled-components'
 import { withSize, withColor, isHidden, withHover } from 'styled-utils'
 
-const override = ({ withColor }) => {
-  if (withColor) return
+const radius = p => p.theme.sizes.radius
+const override = ({ color }) => {
+  if (color) return
   return css`
     background-color: #efefef;
   `
 }
-
-const radius = p => p.theme.sizes.radius
 
 export const Menu = styled.div`
   font-family: ${p => p.theme.fonts.primary};
@@ -18,7 +17,7 @@ export const Menu = styled.div`
   box-sizing: border-box;
   z-index: 4;
   border: 1px solid;
-  border-color: ${p => p.withColor ? p.theme.palettes[p.withColor][p.withTone || 0] : '#dbdbdb'};
+  border-color: ${p => p.color ? p.theme.palettes[p.color][p.tone || 0] : '#dbdbdb'};
   border-radius: ${p => radius(p)};
   color: #000;
 
@@ -40,19 +39,18 @@ export const MenuItem = styled.div`
   outline: none;
   box-sizing: border-box;
 
-  &:not(:first-child):not(:last-child) {
+  &:not(:first-child) {
     border-top: 1px solid;
-    border-bottom: 1px solid;
     border-color: #efefef;
     border-radius: 0;
   }
 
   &:first-child {
-    border-radius: ${p => `${radius(p)} ${radius(p)} 0 0`};
+    border-radius: ${radius} ${radius} 0 0;
   }
   
   &:last-child {
-    border-radius: ${p => `0 0 ${radius(p)} ${radius(p)}`};
+    border-radius: 0 0 ${radius} ${radius};
   } 
 
   & .icon {

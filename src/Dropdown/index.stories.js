@@ -22,7 +22,7 @@ storiesOf('Dropdown', module)
         <Dropdown
           items={importance}
           value={selected}
-          withSize='small'
+          size='small'
           onChange={(item) => console.log(item)}
           placeholder='Select importance' />
       </Box>

@@ -15,18 +15,18 @@ storiesOf('Control', module)
         <Control hasIcons>
           <Input placeholder='Type username here (default)' />
           <Icon name='user' className='left' />
-          <Icon withColor='success' name='check' className='right' />
+          <Icon color='success' name='check' className='right' />
         </Control>
-        <Control withColor='danger' hasIcons>
-          <Input withColor='danger' placeholder='Type password (danger)' type='password' />
+        <Control color='danger' hasIcons>
+          <Input color='danger' placeholder='Type password (danger)' type='password' />
           <Icon name='unlock' className='left' />
-          <Icon withColor='danger' withTone={2} name='warning' className='right' />
+          <Icon color='danger' tone={2} name='warning' className='right' />
         </Control>
         <Control>
           <Dropdown items={labels} isSearch placeholder='Select importance' />
         </Control>
         <Checkbox>Remember me</Checkbox>
-        <Button withColor='primary'>Login</Button>
+        <Button color='primary'>Login</Button>
       </Box>
     )
   }))

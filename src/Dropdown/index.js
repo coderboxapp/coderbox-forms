@@ -27,7 +27,7 @@ class Dropdown extends React.Component {
   static defaultProps = {
     items: [],
     isSearch: false,
-    withTone: 0
+    tone: 0
   }
 
   componentWillReceiveProps (nextProps) {
@@ -197,8 +197,8 @@ class Dropdown extends React.Component {
             placeholder={placeholder}
             disabled={!isSearch}
           />
-          {itemIcon && <Icon withSize={rest.withSize} name={itemIcon} className='left' />}
-          <Icon name='caret-down' withSize={rest.withSize} className='right' />
+          {itemIcon && <Icon size={rest.size} name={itemIcon} className='left' />}
+          <Icon name='caret-down' size={rest.size} className='right' />
         </Control>
 
         <Menu
@@ -206,9 +206,9 @@ class Dropdown extends React.Component {
           selected={value}
           isHidden={!open}
           onItemClick={this.handleItemClick}
-          withSize={rest.withSize}
-          withColor={rest.withColor}
-          withTone={rest.withTone}
+          size={rest.size}
+          color={rest.color}
+          tone={rest.tone}
         />
       </styles.Dropdown>
     )

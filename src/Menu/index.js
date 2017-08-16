@@ -3,9 +3,17 @@ import cx from 'classnames'
 import { Icon } from '@coderbox/atoms'
 import * as styles from './styles'
 
-const Menu = ({ items, selected, withColor, withTone, withSize, onItemClick, ...props }) => {
+const Menu = ({
+  items,
+  selected,
+  color,
+  tone,
+  size,
+  onItemClick,
+  ...props
+}) => {
   const className = cx(`menu`, props.className)
-  const itemSelectedColor = withColor
+  const itemSelectedColor = color
   const itemColor = 'white'
   const isSelected = item => {
     if (!selected) return false
@@ -15,23 +23,23 @@ const Menu = ({ items, selected, withColor, withTone, withSize, onItemClick, ...
   return (
     <styles.Menu
       {...props}
-      withColor={withColor}
-      withTone={withTone}
-      withSize={withSize}
+      color={color}
+      tone={tone}
+      size={size}
       className={className}>
 
       {items.map(
         (item, index) => (
           <styles.MenuItem
             key={index}
-            withColor={isSelected(item) ? itemSelectedColor : itemColor}
-            withTone={withTone}
+            color={isSelected(item) ? itemSelectedColor : itemColor}
+            tone={tone}
             onClick={() => onItemClick(item, index)}
             hasIcon={item.icon}
             className='menu-item'
             {...props} >
 
-            {item.icon && <Icon withSize={withSize} name={item.icon} />}
+            {item.icon && <Icon size={size} name={item.icon} />}
             {item.text}
 
           </styles.MenuItem>
@@ -43,8 +51,8 @@ const Menu = ({ items, selected, withColor, withTone, withSize, onItemClick, ...
 }
 
 Menu.defaultProps = {
-  withSize: 'normal',
-  withTone: 0
+  size: 'normal',
+  tone: 0
 }
 
   /*  */

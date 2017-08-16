@@ -3,7 +3,7 @@ import { rgba } from 'polished'
 import { withSize, withColor, colors } from 'styled-utils'
 
 const override = p => {
-  if (!p.withColor) return
+  if (!p.color) return
 
   let { bgColor, textColor } = colors(p)
   let isInverted = !p.isOutlined

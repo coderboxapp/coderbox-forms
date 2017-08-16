@@ -21,8 +21,8 @@ storiesOf('Menu', module)
     return (
       <Box withSpace='0.5rem'>
         <Menu items={states} />
-        <Menu withSize='small' withColor='primary' items={states} />
-        <Menu withColor='success' items={labels} />
+        <Menu size='small' color='primary' items={states} />
+        <Menu color='success' items={labels} />
       </Box>
     )
   }))

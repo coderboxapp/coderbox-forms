@@ -5,7 +5,7 @@ import * as styles from './styles'
 class Input extends React.Component {
   static defaultProps = {
     type: 'text',
-    withSize: 'normal'
+    size: 'normal'
   }
 
   focus = () => {
@@ -25,8 +25,8 @@ class Input extends React.Component {
 
     return (
       <styles.Input
-        innerRef={this.handleRef}
         {...props}
+        innerRef={this.handleRef}
         isOutlined={!isInverted}
         isInverted={false}
         type={type}
