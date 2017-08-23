@@ -12,7 +12,7 @@ storiesOf('ControlGroup', module).add(
   'group controls',
   withTheme(() => {
     return (
-      <Box withSpace='0.5rem'>
+      <Box vSpace='0.5rem'>
         <ControlGroup>
           <Control>
             <Button isStatic color='gray' size='small' isIcon>

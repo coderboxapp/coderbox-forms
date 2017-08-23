@@ -19,7 +19,7 @@ const labels = [
 storiesOf('Menu', module)
   .add('simple usage', withTheme(() => {
     return (
-      <Box withSpace='0.5rem'>
+      <Box vSpace='0.5rem'>
         <Menu items={states} />
         <Menu size='small' color='primary' items={states} />
         <Menu color='success' items={labels} />

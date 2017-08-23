@@ -11,12 +11,13 @@ import Control from '.'
 storiesOf('Control', module)
   .add('simple usage', withTheme(() => {
     return (
-      <Box withSpace='0.5rem'>
-        <Control hasIcons>
-          <Input placeholder='Type username here (default)' />
-          <Icon name='user' className='left' />
-          <Icon color='success' name='check' className='right' />
-        </Control>
+      <Box vSpace='0.5rem'>
+        <form>
+          <Control hasLeftIcon>
+            <Input placeholder='Type username here (default)' />
+            <Icon name='user' className='left' />
+          </Control>
+        </form>
         <Control color='danger' hasIcons>
           <Input color='danger' placeholder='Type password (danger)' type='password' />
           <Icon name='unlock' className='left' />

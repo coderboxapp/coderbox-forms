@@ -31,7 +31,7 @@ For code example check `.stories.js` files from each component.
 - [x] Control
 - [x] ControlGroup
 - [x] Input
-- [ ] Checkbox
+- [x] Checkbox
 - [x] Dropdown
 - [ ] Textarea
 

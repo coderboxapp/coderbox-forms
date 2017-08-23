@@ -7,8 +7,8 @@ const hasIcons = ({ hasIcons, hasLeftIcon, hasRightIcon }) => {
     & > .icon {
       position: absolute;
       top: 0px;
-      width: ${p => p.theme.sizes.height};;
-      height: ${p => p.theme.sizes.height};;
+      width: ${p => p.theme.sizes.height};
+      height: ${p => p.theme.sizes.height};
       pointer-events: none;
       display: flex;
       align-items: center;
