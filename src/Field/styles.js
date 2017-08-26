@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Field = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: ${p => p.isAlign};
+  align-items: ${p => p.align};
 
   & label {
     color: #363636;

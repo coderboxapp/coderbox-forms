@@ -22,7 +22,8 @@ storiesOf('Dropdown', module)
         <Dropdown
           items={importance}
           value={selected}
-          size='small'
+          color='success'
+          selectedColor='gray'
           onChange={(item) => console.log(item)}
           placeholder='Select importance' />
       </Box>

@@ -1,20 +1,21 @@
 import React from 'react'
 import cx from 'classnames'
-import * as styles from './styles'
+import * as s from './styles'
 
-const Field = ({ label, children, ...props }) => {
+const Component = ({ label, children, ...props }) => {
   const className = cx(`field`, props.className)
 
   return (
-    <styles.Field {...props} className={className}>
+    <s.Field {...props} className={className}>
       {label && <label>{label}</label>}
       {children}
-    </styles.Field>
+    </s.Field>
   )
 }
 
-Field.defaultProps = {
-  isAlign: 'flex-start'
+Component.displayName = 'Field'
+Component.defaultProps = {
+  align: 'normal'
 }
 
-export default Field
+export default Component

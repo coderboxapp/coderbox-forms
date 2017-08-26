@@ -1,18 +1,4 @@
-import styled, { css } from 'styled-components'
-
-const radius = p => p.theme.sizes.radius
-
-const isOpen = ({ isOpen }) => {
-  if (!isOpen) return
-
-  return css`
-    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-
-    & .input {
-      border-radius: ${p => `${radius(p)} ${radius(p)} 0 0`};
-    }
-  `
-}
+import styled from 'styled-components'
 
 export const Dropdown = styled.div`
   width: 100%;
@@ -23,18 +9,10 @@ export const Dropdown = styled.div`
 
   & .menu {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 2px);
     left: 0;
-    margin: -1px 0 0 0;
-    border-radius: ${p => `0 0 ${radius(p)} ${radius(p)}`};
-    border-top: 0 solid;
-    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+    margin: 0 0 0 0;
     z-index: 10;
-
-    & .menu-item:first-child {
-      border-radius: 0;
-      border-top: 1px solid #efefef;
-    }
   }
 
   & .input {
@@ -44,6 +22,4 @@ export const Dropdown = styled.div`
   & > .control {
     width: 100%;
   }
-
-  ${isOpen}
 `

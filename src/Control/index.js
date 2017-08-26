@@ -2,7 +2,7 @@ import React from 'react'
 import cx from 'classnames'
 import * as styles from './styles'
 
-const Control = ({ hasIcons, children, ...props }) => {
+const Component = ({ hasIcons, children, ...props }) => {
   const className = cx(`control`, props.className)
 
   return (
@@ -12,8 +12,9 @@ const Control = ({ hasIcons, children, ...props }) => {
   )
 }
 
-Control.defaultProps = {
+Component.displayName = 'Control'
+Component.defaultProps = {
   hasIcons: false
 }
 
-export default Control
+export default Component

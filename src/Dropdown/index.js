@@ -4,7 +4,7 @@ import cx from 'classnames'
 import { Icon } from '@coderbox/atoms'
 import * as styles from './styles'
 
-import Menu from 'Menu'
+import DropdownMenu from 'DropdownMenu'
 import Input from 'Input'
 import Control from 'Control'
 
@@ -111,6 +111,20 @@ class Dropdown extends React.Component {
     return 0
   }
 
+  getFilterIndex = (item) => {
+    if (!item) return 0
+    let items = this.getFilteredItems()
+    let index = 0
+
+    for (index = 0; index < items.length; index++) {
+      if (item.value === items[index].value) {
+        return index
+      }
+    }
+
+    return 0
+  }
+
   handleKeyDown = (evt) => {
     const moves = {
       [Keys.UP_ARROW]: -1,
@@ -149,7 +163,7 @@ class Dropdown extends React.Component {
 
     if (searchQuery !== evt.target.value) {
       this.setSearchQuery(evt.target.value)
-      this.setState({ selectedIndex: -1, value: null })
+      this.setState({ selectedIndex: 0, value: null })
 
       if (!open) {
         this.open()
@@ -175,13 +189,14 @@ class Dropdown extends React.Component {
 
   render () {
     const { isSearch, placeholder, onChange, ...rest } = this.props
-    const { open, value, searchQuery } = this.state
+    const { open, value, selectedIndex, searchQuery } = this.state
     const className = cx(`dropdown`, rest.className)
 
     const items = this.getFilteredItems()
     const itemText = value ? value.text : ''
     const itemIcon = value && searchQuery === null ? value.icon : null
 
+    console.log(selectedIndex)
     return (
       <styles.Dropdown
         isOpen={open}
@@ -201,13 +216,14 @@ class Dropdown extends React.Component {
           <Icon name='caret-down' size={rest.size} className='right' />
         </Control>
 
-        <Menu
+        <DropdownMenu
           items={items}
-          selected={value}
+          selectedIndex={this.getFilterIndex(value)}
           isHidden={!open}
           onItemClick={this.handleItemClick}
           size={rest.size}
           color={rest.color}
+          selectedColor={rest.selectedColor}
           tone={rest.tone}
         />
       </styles.Dropdown>
