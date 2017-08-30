@@ -27,18 +27,6 @@ const Component = ({ items, selectedIndex, selectedColor, color, tone, onItemCli
   )
 }
 
-/* <s.MenuItem
-  key={index}
-  onClick={() => onItemClick(item, index)}
-  hasIcon={item.icon}
-  className='menu-item'
-  {...props} >
-
-  {item.icon && <Icon name={item.icon} />}
-  {item.text}
-
-</s.MenuItem> */
-
 Component.displayName = 'DropdownMenu'
 Component.defaultProps = {
   size: 'normal',

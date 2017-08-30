@@ -29,6 +29,11 @@ class Dropdown extends React.Component {
     tone: 0
   }
 
+  constructor (props) {
+    super(props)
+    this.state.value = props.value
+  }
+
   componentDidUpdate (prevProps, prevState) {
     let { open } = this.state
 
@@ -173,6 +178,10 @@ class Dropdown extends React.Component {
     const items = this.getItems(searchQuery)
     const itemText = value ? value.text : ''
     const itemIcon = value && searchQuery === null ? value.icon : null
+
+    if (isSearch && items.length === 0) {
+      items.push({ value: 0, text: 'No search result.' })
+    }
 
     return (
       <styles.Dropdown

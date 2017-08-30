@@ -15,14 +15,13 @@ storiesOf('Dropdown', module)
           items={importance}
           value={selected}
           isSearch
-          maxItems={2}
+          maxItems={3}
           onChange={(item) => console.log(item)}
           placeholder='Select importance' />
       </Box>
       <Box>
         <Dropdown
           items={importance}
-          value={selected}
           color='success'
           selectedColor='gray'
           onChange={(item) => console.log(item)}
