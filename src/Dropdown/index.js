@@ -31,9 +31,9 @@ class Dropdown extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.value) {
-      this.setValue(nextProps.value)
-    }
+    // if (nextProps.value) {
+    //   this.setValue(nextProps.value)
+    // }
   }
 
   componentDidUpdate (prevProps, prevState) {
