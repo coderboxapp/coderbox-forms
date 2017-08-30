@@ -3,7 +3,18 @@ import cx from 'classnames'
 import { Icon, Group, Button } from '@coderbox/atoms'
 import * as s from './styles'
 
-const Component = ({ items, selectedIndex, focusIndex, accentColor, color, tone, onItemClick, ...props }) => {
+const Component = ({
+  items,
+  selectedIndex,
+  focusIndex,
+  color,
+  accentColor,
+  tone,
+  onItemClick,
+  labelField,
+  valueField,
+  ...props
+}) => {
   const className = cx(`menu`, props.className)
 
   return (
@@ -19,7 +30,7 @@ const Component = ({ items, selectedIndex, focusIndex, accentColor, color, tone,
               onClick={() => onItemClick(item, index)}
             >
               {item.icon && <Icon size={props.size} name={item.icon} />}
-              {item.text}
+              {item[labelField]}
             </Button>
           )
         )}
@@ -33,6 +44,8 @@ Component.defaultProps = {
   size: 'normal',
   color: 'white',
   accentColor: 'primary',
+  labelField: 'text',
+  valueField: 'value',
   selectedIndex: -1
 }
 

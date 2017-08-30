@@ -280,6 +280,7 @@ class Dropdown extends React.Component {
           selectedIndex={selectedIndex}
           focusIndex={focusIndex}
           isHidden={!open}
+          labelField={labelField}
           onItemClick={this.handleItemClick}
           size={rest.size}
           color={rest.color}
