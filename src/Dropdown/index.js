@@ -21,7 +21,8 @@ class Dropdown extends React.Component {
   state = {
     open: false,
     searchQuery: null,
-    value: null
+    value: null,
+    focusIndex: 0
   }
 
   static defaultProps = {
@@ -79,10 +80,10 @@ class Dropdown extends React.Component {
     if (isMultiple) {
       this.setState(prev => {
         if (onChange) onChange([...prev.value, item])
-        return { value: [...prev.value, item] }
+        return { value: [...prev.value, item], focusIndex: 0 }
       })
     } else {
-      this.setState({ value: item })
+      this.setState({ value: item, focusIndex: this.getItemIndex(item) })
       if (onChange) onChange(item)
     }
   }
@@ -97,19 +98,18 @@ class Dropdown extends React.Component {
       })
     }
 
-    evt.stopPropagation()
+    if (evt) evt.stopPropagation()
   }
 
   moveIndex = (increment) => {
-    // let { value, searchQuery } = this.state
-    // let items = this.getItems(searchQuery)
-    // let index = this.getItemIndex(value, true)
-    // let lastIndex = items.length
+    let { focusIndex, searchQuery } = this.state
+    let items = this.getItems(searchQuery)
+    let lastIndex = items.length
 
-    // index = (index + increment) % lastIndex
-    // if (index < 0) index = lastIndex - 1
+    focusIndex = (focusIndex + increment) % lastIndex
+    if (focusIndex < 0) focusIndex = lastIndex - 1
 
-    // this.select(items[index])
+    this.setState({ focusIndex })
   }
 
   getItems = (searchQuery) => {
@@ -127,11 +127,11 @@ class Dropdown extends React.Component {
     return items.slice(0, maxItems)
   }
 
-  getItemIndex = (item, filtered) => {
+  getItemIndex = (item) => {
     if (!item) return 0
 
     let { searchQuery } = this.state
-    let items = filtered ? this.getItems(searchQuery) : this.getItems()
+    let items = this.getItems(searchQuery)
     let index = 0
 
     for (index = 0; index < items.length; index++) {
@@ -140,10 +140,22 @@ class Dropdown extends React.Component {
       }
     }
 
-    return 0
+    return -1
+  }
+
+  handleInputKeyDown = (evt) => {
+    const { isMultiple } = this.props
+    const { value, searchQuery } = this.state
+
+    if (evt.keyCode === Keys.BACKSPACE && isMultiple) {
+      if (!searchQuery && value.length) {
+        this.deselect(null, value.concat().pop())
+      }
+    }
   }
 
   handleKeyDown = (evt) => {
+    const { focusIndex, searchQuery } = this.state
     const moves = {
       [Keys.UP_ARROW]: -1,
       [Keys.DOWN_ARROW]: 1
@@ -155,11 +167,11 @@ class Dropdown extends React.Component {
     }
 
     if (evt.keyCode === Keys.ENTER) {
-      if (this.props.isMultiple) {
-        this.select(this.getItems(evt.target.value)[0])
+      let items = this.getItems(searchQuery)
+      if (items.length) {
+        this.select(items[focusIndex])
+        this.clearSearchQuery()
       }
-
-      this.clearSearchQuery()
       this.close()
       return
     }
@@ -182,13 +194,10 @@ class Dropdown extends React.Component {
 
   handleSearch = (evt) => {
     const { open, searchQuery } = this.state
-    const { isMultiple } = this.props
 
     if (searchQuery !== evt.target.value) {
       this.setSearchQuery(evt.target.value)
-      if (!isMultiple) {
-        this.select(this.getItems(evt.target.value)[0])
-      }
+      this.setState({ focusIndex: 0 })
 
       if (!open) {
         this.open()
@@ -214,13 +223,13 @@ class Dropdown extends React.Component {
 
   render () {
     const { isSearch, placeholder, isMultiple, onChange, ...rest } = this.props
-    const { open, value, searchQuery } = this.state
+    const { open, value, focusIndex, searchQuery } = this.state
     const className = cx(`dropdown`, rest.className)
 
     let items = this.getItems(searchQuery)
     let itemText = value ? value.text : ''
     let itemIcon = value && searchQuery === null ? value.icon : null
-    let selectedIndex = isMultiple ? 0 : this.getItemIndex(value, true)
+    let selectedIndex = isMultiple ? 0 : this.getItemIndex(value)
 
     if (isSearch && items.length === 0) {
       items.push({ value: 0, text: 'No search result.' })
@@ -228,8 +237,8 @@ class Dropdown extends React.Component {
     }
 
     if (isMultiple) {
-      // selectedIndex = -1
       itemText = ''
+      selectedIndex = -1
     }
 
     return (
@@ -255,6 +264,7 @@ class Dropdown extends React.Component {
             ref='search'
             value={searchQuery !== null ? searchQuery : itemText}
             onChange={this.handleSearch}
+            onKeyDown={this.handleInputKeyDown}
             placeholder={placeholder}
             disabled={!isSearch}
           />
@@ -265,6 +275,7 @@ class Dropdown extends React.Component {
         <DropdownMenu
           items={items}
           selectedIndex={selectedIndex}
+          focusIndex={focusIndex}
           isHidden={!open}
           onItemClick={this.handleItemClick}
           size={rest.size}

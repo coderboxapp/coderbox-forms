@@ -2,15 +2,15 @@
 # yarn lockfile v1
 
 
-"@coderbox/atoms@^1.0.34":
-  version "1.0.34"
-  resolved "https://registry.yarnpkg.com/@coderbox/atoms/-/atoms-1.0.34.tgz#95d5c4a075b1df7de7ebb4b2bb5f601735e30735"
+"@coderbox/atoms@^1.0.36":
+  version "1.0.36"
+  resolved "https://registry.yarnpkg.com/@coderbox/atoms/-/atoms-1.0.36.tgz#9313e6e32c7d5ce53b546669817b7619a03c66cc"
   dependencies:
     react "^15.5.4"
     react-dom "^15.5.4"
     styled-components "^2.1.2"
     styled-theme "^0.3.3"
-    styled-utils "^1.2.3"
+    styled-utils "^1.2.4"
 
 "@hypnosphi/fuse.js@^3.0.9":
   version "3.0.9"
@@ -5481,9 +5481,9 @@ styled-tools@^0.1.4:
   dependencies:
     lodash "^4.17.4"
 
-styled-utils@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/styled-utils/-/styled-utils-1.2.3.tgz#8d9f49f9db814513004c6a96d2168f3594fde1be"
+styled-utils@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/styled-utils/-/styled-utils-1.2.4.tgz#b11f9b766f624bf3f5658b9bb25aa38a1063a2d9"
   dependencies:
     lodash "^4.17.4"
     polished "^1.3.0"

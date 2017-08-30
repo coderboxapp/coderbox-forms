@@ -14,6 +14,7 @@ const Component = ({ items, selectedIndex, focusIndex, accentColor, color, tone,
             <Button
               key={index}
               color={index === selectedIndex ? accentColor : color}
+              isHover={index === focusIndex}
               tone={tone}
               onClick={() => onItemClick(item, index)}
             >
