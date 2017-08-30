@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@coderbox/atoms@^1.0.33":
-  version "1.0.33"
-  resolved "https://registry.yarnpkg.com/@coderbox/atoms/-/atoms-1.0.33.tgz#6931e227768f75d8be67166093cd3e9039e8dd72"
+"@coderbox/atoms@^1.0.34":
+  version "1.0.34"
+  resolved "https://registry.yarnpkg.com/@coderbox/atoms/-/atoms-1.0.34.tgz#95d5c4a075b1df7de7ebb4b2bb5f601735e30735"
   dependencies:
     react "^15.5.4"
     react-dom "^15.5.4"

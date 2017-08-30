@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import cx from 'classnames'
-import { Icon } from '@coderbox/atoms'
+import { difference } from 'lodash'
+import { Icon, Tag, Group } from '@coderbox/atoms'
 import * as styles from './styles'
 
 import DropdownMenu from 'DropdownMenu'
@@ -26,12 +27,18 @@ class Dropdown extends React.Component {
   static defaultProps = {
     items: [],
     isSearch: false,
+    isMultiple: false,
+    accentColor: 'primary',
     tone: 0
   }
 
   constructor (props) {
     super(props)
     this.state.value = props.value
+
+    if (props.isMultiple && !this.state.value) {
+      this.state.value = []
+    }
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -67,29 +74,57 @@ class Dropdown extends React.Component {
   }
 
   select = (item) => {
-    let { onChange } = this.props
-    if (onChange) onChange(item)
+    let { onChange, isMultiple } = this.props
 
-    this.setState({ value: item })
+    if (isMultiple) {
+      this.setState(prev => {
+        if (onChange) onChange([...prev.value, item])
+        return { value: [...prev.value, item] }
+      })
+    } else {
+      this.setState({ value: item })
+      if (onChange) onChange(item)
+    }
+  }
+
+  deselect = (evt, item) => {
+    let { isMultiple, onChange } = this.props
+
+    if (isMultiple) {
+      this.setState(prev => {
+        if (onChange) onChange(difference(prev.value, [item]))
+        return { value: difference(prev.value, [item]) }
+      })
+    }
+
+    evt.stopPropagation()
   }
 
   moveIndex = (increment) => {
-    let { value, searchQuery } = this.state
-    let items = this.getItems(searchQuery)
-    let index = this.getItemIndex(value, true)
-    let lastIndex = items.length
+    // let { value, searchQuery } = this.state
+    // let items = this.getItems(searchQuery)
+    // let index = this.getItemIndex(value, true)
+    // let lastIndex = items.length
 
-    index = (index + increment) % lastIndex
-    if (index < 0) index = lastIndex - 1
+    // index = (index + increment) % lastIndex
+    // if (index < 0) index = lastIndex - 1
 
-    this.select(items[index])
+    // this.select(items[index])
   }
 
   getItems = (searchQuery) => {
-    const { items, maxItems } = this.props
-    if (!searchQuery) return items.slice(0, maxItems)
+    let { items, isMultiple, maxItems } = this.props
+    let { value } = this.state
 
-    return items.filter((i) => i.text.toLowerCase().search(searchQuery.toLowerCase()) > -1).slice(0, maxItems)
+    if (searchQuery) {
+      items = items.filter((i) => i.text.toLowerCase().search(searchQuery.toLowerCase()) > -1)
+    }
+
+    if (isMultiple) {
+      items = difference(items, value)
+    }
+
+    return items.slice(0, maxItems)
   }
 
   getItemIndex = (item, filtered) => {
@@ -120,6 +155,10 @@ class Dropdown extends React.Component {
     }
 
     if (evt.keyCode === Keys.ENTER) {
+      if (this.props.isMultiple) {
+        this.select(this.getItems(evt.target.value)[0])
+      }
+
       this.clearSearchQuery()
       this.close()
       return
@@ -143,10 +182,13 @@ class Dropdown extends React.Component {
 
   handleSearch = (evt) => {
     const { open, searchQuery } = this.state
+    const { isMultiple } = this.props
 
     if (searchQuery !== evt.target.value) {
       this.setSearchQuery(evt.target.value)
-      this.setState({ value: this.getItems(evt.target.value)[0] })
+      if (!isMultiple) {
+        this.select(this.getItems(evt.target.value)[0])
+      }
 
       if (!open) {
         this.open()
@@ -171,16 +213,23 @@ class Dropdown extends React.Component {
   }
 
   render () {
-    const { isSearch, placeholder, onChange, ...rest } = this.props
+    const { isSearch, placeholder, isMultiple, onChange, ...rest } = this.props
     const { open, value, searchQuery } = this.state
     const className = cx(`dropdown`, rest.className)
 
-    const items = this.getItems(searchQuery)
-    const itemText = value ? value.text : ''
-    const itemIcon = value && searchQuery === null ? value.icon : null
+    let items = this.getItems(searchQuery)
+    let itemText = value ? value.text : ''
+    let itemIcon = value && searchQuery === null ? value.icon : null
+    let selectedIndex = isMultiple ? 0 : this.getItemIndex(value, true)
 
     if (isSearch && items.length === 0) {
       items.push({ value: 0, text: 'No search result.' })
+      selectedIndex = -1
+    }
+
+    if (isMultiple) {
+      // selectedIndex = -1
+      itemText = ''
     }
 
     return (
@@ -190,8 +239,19 @@ class Dropdown extends React.Component {
         className={className}>
 
         <Control hasLeftIcon={itemIcon} hasRightIcon>
+          {(isMultiple && value.length > 0) &&
+            <div className='tags'>
+              {value.map(v => {
+                return (
+                  <Group key={v.value}>
+                    <Tag color={rest.color || rest.accentColor}>{v.text}</Tag>
+                    <Tag onClick={(e) => this.deselect(e, v)} color={rest.color || rest.accentColor} tone={1} isDelete />
+                  </Group>
+                )
+              })}
+            </div>
+          }
           <Input
-            {...rest}
             ref='search'
             value={searchQuery !== null ? searchQuery : itemText}
             onChange={this.handleSearch}
@@ -204,12 +264,12 @@ class Dropdown extends React.Component {
 
         <DropdownMenu
           items={items}
-          selectedIndex={this.getItemIndex(value, true)}
+          selectedIndex={selectedIndex}
           isHidden={!open}
           onItemClick={this.handleItemClick}
           size={rest.size}
           color={rest.color}
-          selectedColor={rest.selectedColor}
+          accentColor={rest.accentColor}
           tone={rest.tone}
         />
       </styles.Dropdown>

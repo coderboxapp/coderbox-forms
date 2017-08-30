@@ -10,7 +10,7 @@ storiesOf('DropdownMenu', module)
     return (
       <Box vSpace='0.5rem'>
         <DropdownMenu items={importance} selectedIndex={2} />
-        <DropdownMenu color='success' selectedColor='gray' items={importance} selectedIndex={2} />
+        <DropdownMenu color='success' accentColor='gray' items={importance} selectedIndex={2} />
         <DropdownMenu color='danger' items={labels} />
       </Box>
     )

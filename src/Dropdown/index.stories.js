@@ -12,19 +12,28 @@ storiesOf('Dropdown', module)
     <div>
       <Box>
         <Dropdown
+          isSearch
           items={importance}
           value={selected}
-          isSearch
-          maxItems={3}
           onChange={(item) => console.log(item)}
           placeholder='Select importance' />
       </Box>
       <Box>
         <Dropdown
           items={importance}
-          color='success'
-          selectedColor='gray'
+          value={[selected]}
+          isSearch
+          isMultiple
           onChange={(item) => console.log(item)}
+          placeholder='Select importance' />
+      </Box>
+      <Box>
+        <Dropdown
+          isMultiple
+          items={importance}
+          color='danger'
+          accentColor='gray'
+          onChange={(items) => console.log(items)}
           placeholder='Select importance' />
       </Box>
     </div>
