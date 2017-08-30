@@ -30,6 +30,8 @@ class Dropdown extends React.Component {
     isSearch: false,
     isMultiple: false,
     accentColor: 'primary',
+    labelField: 'text',
+    valueField: 'value',
     tone: 0
   }
 
@@ -113,11 +115,11 @@ class Dropdown extends React.Component {
   }
 
   getItems = (searchQuery) => {
-    let { items, isMultiple, maxItems } = this.props
+    let { items, isMultiple, labelField, maxItems } = this.props
     let { value } = this.state
 
     if (searchQuery) {
-      items = items.filter((i) => i.text.toLowerCase().search(searchQuery.toLowerCase()) > -1)
+      items = items.filter((i) => i[labelField].toLowerCase().search(searchQuery.toLowerCase()) > -1)
     }
 
     if (isMultiple) {
@@ -131,11 +133,12 @@ class Dropdown extends React.Component {
     if (!item) return 0
 
     let { searchQuery } = this.state
+    let { valueField } = this.props
     let items = this.getItems(searchQuery)
     let index = 0
 
     for (index = 0; index < items.length; index++) {
-      if (item.value === items[index].value) {
+      if (item[valueField] === items[index][valueField]) {
         return index
       }
     }
@@ -222,12 +225,12 @@ class Dropdown extends React.Component {
   }
 
   render () {
-    const { isSearch, placeholder, isMultiple, onChange, ...rest } = this.props
+    const { isSearch, placeholder, isMultiple, labelField, onChange, ...rest } = this.props
     const { open, value, focusIndex, searchQuery } = this.state
     const className = cx(`dropdown`, rest.className)
 
     let items = this.getItems(searchQuery)
-    let itemText = value ? value.text : ''
+    let itemText = value ? value[labelField] : ''
     let itemIcon = value && searchQuery === null ? value.icon : null
     let selectedIndex = isMultiple ? 0 : this.getItemIndex(value)
 
@@ -250,10 +253,10 @@ class Dropdown extends React.Component {
         <Control hasLeftIcon={itemIcon} hasRightIcon>
           {(isMultiple && value.length > 0) &&
             <div className='tags'>
-              {value.map(v => {
+              {value.map((v, vIndex) => {
                 return (
-                  <Group key={v.value}>
-                    <Tag color={rest.color || rest.accentColor}>{v.text}</Tag>
+                  <Group key={vIndex}>
+                    <Tag color={rest.color || rest.accentColor}>{v[labelField]}</Tag>
                     <Tag onClick={(e) => this.deselect(e, v)} color={rest.color || rest.accentColor} tone={1} isDelete />
                   </Group>
                 )
