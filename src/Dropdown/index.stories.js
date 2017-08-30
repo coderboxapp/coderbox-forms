@@ -15,6 +15,7 @@ storiesOf('Dropdown', module)
           items={importance}
           value={selected}
           isSearch
+          maxItems={2}
           onChange={(item) => console.log(item)}
           placeholder='Select importance' />
       </Box>

@@ -20,7 +20,6 @@ class Dropdown extends React.Component {
   state = {
     open: false,
     searchQuery: null,
-    selectedIndex: 0,
     value: null
   }
 
@@ -28,12 +27,6 @@ class Dropdown extends React.Component {
     items: [],
     isSearch: false,
     tone: 0
-  }
-
-  componentWillReceiveProps (nextProps) {
-    // if (nextProps.value) {
-    //   this.setValue(nextProps.value)
-    // }
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -68,52 +61,37 @@ class Dropdown extends React.Component {
     this.setState({ searchQuery: null })
   }
 
-  setValue = (value) => {
+  select = (item) => {
     let { onChange } = this.props
-    let selectedIndex = this.getItemIndex(value)
+    if (onChange) onChange(item)
 
-    if (onChange) onChange(value)
-
-    this.setState({ value, selectedIndex })
+    this.setState({ value: item })
   }
 
-  moveIndex = (value) => {
-    let items = this.getFilteredItems()
+  moveIndex = (increment) => {
+    let { value, searchQuery } = this.state
+    let items = this.getItems(searchQuery)
+    let index = this.getItemIndex(value, true)
     let lastIndex = items.length
-    let selectedIndex = this.state.selectedIndex
 
-    selectedIndex = (selectedIndex + value) % lastIndex
-    if (selectedIndex < 0) selectedIndex = lastIndex - 1
+    index = (index + increment) % lastIndex
+    if (index < 0) index = lastIndex - 1
 
-    this.setValue(items[selectedIndex])
+    this.select(items[index])
   }
 
-  getFilteredItems = () => {
-    const { items } = this.props
-    const { searchQuery } = this.state
-    if (!searchQuery) return items
+  getItems = (searchQuery) => {
+    const { items, maxItems } = this.props
+    if (!searchQuery) return items.slice(0, maxItems)
 
-    return items.filter((i) => i.text.toLowerCase().search(searchQuery.toLowerCase()) > -1)
+    return items.filter((i) => i.text.toLowerCase().search(searchQuery.toLowerCase()) > -1).slice(0, maxItems)
   }
 
-  getItemIndex = (item) => {
+  getItemIndex = (item, filtered) => {
     if (!item) return 0
 
-    let items = this.props.items
-    let index = 0
-
-    for (index = 0; index < items.length; index++) {
-      if (item.value === items[index].value) {
-        return index
-      }
-    }
-
-    return 0
-  }
-
-  getFilterIndex = (item) => {
-    if (!item) return 0
-    let items = this.getFilteredItems()
+    let { searchQuery } = this.state
+    let items = filtered ? this.getItems(searchQuery) : this.getItems()
     let index = 0
 
     for (index = 0; index < items.length; index++) {
@@ -163,7 +141,7 @@ class Dropdown extends React.Component {
 
     if (searchQuery !== evt.target.value) {
       this.setSearchQuery(evt.target.value)
-      this.setState({ selectedIndex: 0, value: null })
+      this.setState({ value: this.getItems(evt.target.value)[0] })
 
       if (!open) {
         this.open()
@@ -182,21 +160,20 @@ class Dropdown extends React.Component {
   }
 
   handleItemClick = (item) => {
-    this.setValue(item)
+    this.select(item)
     this.clearSearchQuery()
     this.close()
   }
 
   render () {
     const { isSearch, placeholder, onChange, ...rest } = this.props
-    const { open, value, selectedIndex, searchQuery } = this.state
+    const { open, value, searchQuery } = this.state
     const className = cx(`dropdown`, rest.className)
 
-    const items = this.getFilteredItems()
+    const items = this.getItems(searchQuery)
     const itemText = value ? value.text : ''
     const itemIcon = value && searchQuery === null ? value.icon : null
 
-    console.log(selectedIndex)
     return (
       <styles.Dropdown
         isOpen={open}
@@ -218,7 +195,7 @@ class Dropdown extends React.Component {
 
         <DropdownMenu
           items={items}
-          selectedIndex={this.getFilterIndex(value)}
+          selectedIndex={this.getItemIndex(value, true)}
           isHidden={!open}
           onItemClick={this.handleItemClick}
           size={rest.size}
