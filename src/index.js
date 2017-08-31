@@ -1,5 +1,7 @@
 import Control from 'Control'
 import ControlGroup from 'ControlGroup'
+import DatePick from 'DatePick'
+import DateRange from 'DateRange'
 import Dropdown from 'Dropdown'
 import DropdownMenu from 'DropdownMenu'
 import Field from 'Field'
@@ -9,6 +11,8 @@ import Input from 'Input'
 export {
   Control,
   ControlGroup,
+  DatePick,
+  DateRange,
   Dropdown,
   DropdownMenu,
   Field,
