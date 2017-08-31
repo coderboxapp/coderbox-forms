@@ -45,14 +45,14 @@ class Component extends React.Component {
     return (
       <DateRange {...props}>
         <div>
-          <DatePick value={range.start} onChange={d => this.handletDateChange(d, 'start')} hideMonths={hideMonths} color={props.color} />
+          <DatePick value={range.start} onChange={d => this.handletDateChange(d, 'start')} hideMonths={hideMonths} color={props.color} size={props.size} />
           <Icon name='long-arrow-right' />
           {range.end
-            ? <DatePick value={range.end} onChange={d => this.handletDateChange(d, 'end')} hideMonths={hideMonths} color={props.color} />
+            ? <DatePick value={range.end} onChange={d => this.handletDateChange(d, 'end')} hideMonths={hideMonths} color={props.color} size={props.size} />
             : <div>Present</div>
           }
         </div>
-        <Checkbox checked={!range.end} onChange={this.handleChecked}>{label || 'I still work here'}</Checkbox>
+        <Checkbox size={props.size} checked={!range.end} onChange={this.handleChecked}>{label || 'I still work here'}</Checkbox>
       </DateRange>
     )
   }

@@ -2,7 +2,8 @@ import React from 'react'
 import cx from 'classnames'
 import * as styles from './styles'
 
-class Input extends React.Component {
+class Component extends React.Component {
+  static displayName = 'Input'
   static defaultProps = {
     type: 'text',
     size: 'normal'
@@ -35,4 +36,4 @@ class Input extends React.Component {
   }
 }
 
-export default Input
+export default Component
