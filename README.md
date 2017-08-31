@@ -33,6 +33,8 @@ For code example check `.stories.js` files from each component.
 - [x] Input
 - [x] Checkbox
 - [x] Dropdown
+- [x] DatePick
+- [x] DateRange
 - [ ] Textarea
 
 # Build

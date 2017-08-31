@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const DateRange = styled.div`
+  color: #000;
   & > div:first-child {
     display: flex;
     align-items: center;

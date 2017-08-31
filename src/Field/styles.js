@@ -5,7 +5,7 @@ export const Field = styled.div`
   flex-direction: column;
   align-items: ${p => p.align};
 
-  & label {
+  & > label {
     color: #363636;
     display: block;
     font-size: 1rem;
