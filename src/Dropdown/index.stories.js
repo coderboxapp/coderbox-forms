@@ -3,7 +3,7 @@ import { withTheme } from 'utils'
 import { storiesOf } from '@storybook/react'
 import { Box } from '@coderbox/atoms'
 import Dropdown from '.'
-import { importance } from 'mockup'
+import { importance, stringItems } from 'mockup'
 
 const selected = importance[1]
 
@@ -12,26 +12,28 @@ storiesOf('Dropdown', module)
     <div>
       <Box>
         <Dropdown
-          isSearch
-          size='small'
-          items={importance}
-          value={selected}
-          onChange={(item) => console.log(item)}
-          placeholder='Select importance' />
-      </Box>
-      <Box>
-        <Dropdown
           items={importance}
           value={[selected]}
           isSearch
           isMultiple
+          allowNew
           onChange={(item) => console.log(item)}
           placeholder='Select importance' />
       </Box>
       <Box>
         <Dropdown
           isMultiple
-          items={importance}
+          items={stringItems}
+          color='danger'
+          accentColor='gray'
+          onChange={(items) => console.log(items)}
+          placeholder='Select importance' />
+      </Box>
+      <Box>
+        <Dropdown
+          isSearch
+          value=''
+          items={[]}
           color='danger'
           accentColor='gray'
           onChange={(items) => console.log(items)}

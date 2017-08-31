@@ -13,3 +13,4 @@ export const importance = [
 ]
 
 export const dateRange = { end: '2015-06-08T12:57:34.716Z', start: '2009-12-31T22:00:00.000Z' }
+export const stringItems = ['Alexandru', 'Ionescu', 'Vasile', 'Andreea']
