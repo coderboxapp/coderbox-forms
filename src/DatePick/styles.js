@@ -6,7 +6,7 @@ export const DatePick = styled.div`
   }
 
   & .months {
-    max-width: 150px;
+    max-width: 110px;
   }
 
   & .menu {
