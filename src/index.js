@@ -7,6 +7,7 @@ import DropdownMenu from 'DropdownMenu'
 import Field from 'Field'
 import FieldGroup from 'FieldGroup'
 import Input from 'Input'
+import Textarea from 'Textarea'
 
 export {
   Control,
@@ -17,5 +18,6 @@ export {
   DropdownMenu,
   Field,
   FieldGroup,
-  Input
+  Input,
+  Textarea
 }
