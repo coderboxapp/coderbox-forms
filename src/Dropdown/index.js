@@ -264,6 +264,7 @@ class Dropdown extends React.Component {
             </div>
           }
           <Input
+            size={rest.size}
             ref='search'
             value={searchQuery !== null ? searchQuery : itemText}
             onChange={this.handleSearch}

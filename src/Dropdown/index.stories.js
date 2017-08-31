@@ -13,6 +13,7 @@ storiesOf('Dropdown', module)
       <Box>
         <Dropdown
           isSearch
+          size='small'
           items={importance}
           value={selected}
           onChange={(item) => console.log(item)}

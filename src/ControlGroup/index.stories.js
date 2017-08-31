@@ -31,6 +31,7 @@ storiesOf('ControlGroup', module).add(
             </Button>
           </Control>
         </ControlGroup>
+
         <ControlGroup>
           <Control>
             <Button isStatic color='success' isIcon>
