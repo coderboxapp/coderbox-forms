@@ -224,6 +224,27 @@ class Dropdown extends React.Component {
     this.close()
   }
 
+  renderTags (tags) {
+    if (tags.length < 1) return null
+
+    let { color, accentColor, labelField } = this.props
+    let tagColor = color || accentColor
+    console.log('colooor', tagColor)
+
+    return (
+      <div className='tags'>
+        {tags.map((tag, vIndex) => {
+          return (
+            <Group key={vIndex}>
+              <Tag color={tagColor}>{tag[labelField]}</Tag>
+              <Tag onClick={(e) => this.deselect(e, tag)} color={tagColor} tone={1} isDelete />
+            </Group>
+          )
+        })}
+      </div>
+    )
+  }
+
   render () {
     const { isSearch, placeholder, isMultiple, labelField, onChange, ...rest } = this.props
     const { open, value, focusIndex, searchQuery } = this.state
@@ -251,18 +272,7 @@ class Dropdown extends React.Component {
         className={className}>
 
         <Control hasLeftIcon={itemIcon} hasRightIcon>
-          {(isMultiple && value.length > 0) &&
-            <div className='tags'>
-              {value.map((v, vIndex) => {
-                return (
-                  <Group key={vIndex}>
-                    <Tag color={rest.color || rest.accentColor}>{v[labelField]}</Tag>
-                    <Tag onClick={(e) => this.deselect(e, v)} color={rest.color || rest.accentColor} tone={1} isDelete />
-                  </Group>
-                )
-              })}
-            </div>
-          }
+          {isMultiple && this.renderTags(value)}
           <Input
             ref='search'
             value={searchQuery !== null ? searchQuery : itemText}
