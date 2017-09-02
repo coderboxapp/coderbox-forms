@@ -8,7 +8,8 @@ export const ControlGroup = styled.div`
 
   & > .control {
     & .input,
-    & .button {
+    & .button,
+    & .dropdown .control {
       margin: 0 0 0 0;
       border-radius: 0;
     }
@@ -16,14 +17,16 @@ export const ControlGroup = styled.div`
   
   & > .control:first-child {
     & .input,
-    & .button {
+    & .button,
+    & .dropdown .control {
       border-radius: ${p => `${radius(p)} 0 0 ${radius(p)}`};
     }
   }
 
   & > .control:last-child {
     & .input,
-    & .button {
+    & .button,
+    & .dropdown .control {
       border-radius: ${p => `0 ${radius(p)} ${radius(p)} 0`};
     }
   }

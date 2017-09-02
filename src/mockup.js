@@ -11,3 +11,6 @@ export const importance = [
   {value: '2', text: 'Normal', icon: 'circle-o'},
   {value: '3', text: 'Low', icon: 'star'}
 ]
+
+export const dateRange = { end: '2015-06-08T12:57:34.716Z', start: '2009-12-31T22:00:00.000Z' }
+export const stringItems = ['Alexandru', 'Ionescu', 'Vasile', 'Andreea']

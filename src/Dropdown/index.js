@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import cx from 'classnames'
-import { difference } from 'lodash'
+import { isObject, difference } from 'lodash'
 import { Icon, Tag, Group } from '@coderbox/atoms'
 import * as styles from './styles'
 
@@ -31,7 +31,7 @@ class Dropdown extends React.Component {
     isMultiple: false,
     accentColor: 'primary',
     labelField: 'text',
-    valueField: 'value',
+    allowNew: false,
     tone: 0
   }
 
@@ -115,11 +115,16 @@ class Dropdown extends React.Component {
   }
 
   getItems = (searchQuery) => {
-    let { items, isMultiple, labelField, maxItems } = this.props
+    let { items, isMultiple, maxItems } = this.props
     let { value } = this.state
 
     if (searchQuery) {
-      items = items.filter((i) => i[labelField].toLowerCase().search(searchQuery.toLowerCase()) > -1)
+      items = items.filter(
+        i => {
+          let label = this.getItemLabel(i)
+          return label.toLowerCase().search(searchQuery.toLowerCase()) > -1
+        }
+      )
     }
 
     if (isMultiple) {
@@ -129,16 +134,22 @@ class Dropdown extends React.Component {
     return items.slice(0, maxItems)
   }
 
+  getItemLabel = item => {
+    let { labelField } = this.props
+    let label = isObject(item) ? item[labelField] : item
+
+    return label
+  }
+
   getItemIndex = (item) => {
     if (!item) return 0
 
     let { searchQuery } = this.state
-    let { valueField } = this.props
     let items = this.getItems(searchQuery)
     let index = 0
 
     for (index = 0; index < items.length; index++) {
-      if (item[valueField] === items[index][valueField]) {
+      if (this.getItemLabel(item) === this.getItemLabel(items[index])) {
         return index
       }
     }
@@ -159,6 +170,7 @@ class Dropdown extends React.Component {
 
   handleKeyDown = (evt) => {
     const { focusIndex, searchQuery } = this.state
+    const { isMultiple, labelField, allowNew } = this.props
     const moves = {
       [Keys.UP_ARROW]: -1,
       [Keys.DOWN_ARROW]: 1
@@ -171,10 +183,15 @@ class Dropdown extends React.Component {
 
     if (evt.keyCode === Keys.ENTER) {
       let items = this.getItems(searchQuery)
+
       if (items.length) {
         this.select(items[focusIndex])
         this.clearSearchQuery()
+      } else if (isMultiple && allowNew) {
+        this.select({[labelField]: searchQuery})
+        this.clearSearchQuery()
       }
+
       this.close()
       return
     }
@@ -246,19 +263,15 @@ class Dropdown extends React.Component {
   }
 
   render () {
-    const { isSearch, placeholder, isMultiple, labelField, onChange, ...rest } = this.props
+    const { isSearch, placeholder, isMultiple, onChange, ...rest } = this.props
     const { open, value, focusIndex, searchQuery } = this.state
     const className = cx(`dropdown`, rest.className)
 
     let items = this.getItems(searchQuery)
-    let itemText = value ? value[labelField] : ''
+
+    let itemText = this.getItemLabel(value)
     let itemIcon = value && searchQuery === null ? value.icon : null
     let selectedIndex = isMultiple ? 0 : this.getItemIndex(value)
-
-    if (isSearch && items.length === 0) {
-      items.push({ value: 0, text: 'No search result.' })
-      selectedIndex = -1
-    }
 
     if (isMultiple) {
       itemText = ''
@@ -274,6 +287,7 @@ class Dropdown extends React.Component {
         <Control hasLeftIcon={itemIcon} hasRightIcon>
           {isMultiple && this.renderTags(value)}
           <Input
+            size={rest.size}
             ref='search'
             value={searchQuery !== null ? searchQuery : itemText}
             onChange={this.handleSearch}
@@ -285,18 +299,20 @@ class Dropdown extends React.Component {
           <Icon name='caret-down' size={rest.size} className='right' />
         </Control>
 
+        {items.length > 0 &&
         <DropdownMenu
           items={items}
           selectedIndex={selectedIndex}
           focusIndex={focusIndex}
           isHidden={!open}
-          labelField={labelField}
+          labelField={rest.labelField}
           onItemClick={this.handleItemClick}
           size={rest.size}
           color={rest.color}
           accentColor={rest.accentColor}
           tone={rest.tone}
         />
+        }
       </styles.Dropdown>
     )
   }

@@ -21,6 +21,7 @@ export const Dropdown = styled.div`
     border: none;
     box-shadow: none;
     background-color: transparent;
+    height: calc(2.40em - 2px);
   }
 
   & > .control {

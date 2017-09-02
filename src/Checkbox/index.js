@@ -25,7 +25,7 @@ class Checkbox extends React.Component {
   render () {
     const { children, ...props } = this.props
     const { checked } = this.state
-    const className = cx(`checkobx`, props.className)
+    const className = cx(`checkbox`, props.className)
 
     return (
       <styles.Checkbox {...props} className={className}>
