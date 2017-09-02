@@ -35,10 +35,12 @@ export const Dropdown = styled.div`
 
   & .tags {
     display: flex;
+    flex-wrap: wrap;
     padding: 0.35em 2.40em 0 0.35em;
   }
 
   & .tags .group:not(:last-child) {
     margin-right: 0.25em;
+    margin-bottom: 0.25em;
   }
 `
