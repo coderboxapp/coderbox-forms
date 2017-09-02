@@ -244,16 +244,15 @@ class Dropdown extends React.Component {
   renderTags (tags) {
     if (tags.length < 1) return null
 
-    let { color, accentColor, labelField } = this.props
+    let { color, accentColor } = this.props
     let tagColor = color || accentColor
-    console.log('colooor', tagColor)
 
     return (
       <div className='tags'>
         {tags.map((tag, vIndex) => {
           return (
             <Group key={vIndex}>
-              <Tag color={tagColor}>{tag[labelField]}</Tag>
+              <Tag color={tagColor}>{this.getItemLabel(tag)}</Tag>
               <Tag onClick={(e) => this.deselect(e, tag)} color={tagColor} tone={1} isDelete />
             </Group>
           )
