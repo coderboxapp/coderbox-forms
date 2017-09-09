@@ -298,6 +298,7 @@ class Dropdown extends React.Component {
 
     return (
       <styles.Dropdown
+        {...rest}
         isOpen={open}
         onClick={this.handleClick}
         onBlur={this.handleBlur}

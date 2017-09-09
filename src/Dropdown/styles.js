@@ -6,7 +6,6 @@ export const Dropdown = styled.div`
   position: relative;
   display: inline-flex;
   align-items: center;
-
   & .menu {
     position: absolute;
     top: calc(100% + 2px);
@@ -26,7 +25,7 @@ export const Dropdown = styled.div`
 
   & > .control {
     width: 100%;
-    border: 1px solid #dbdbdb;
+    border: 1px solid ${p => p.borderColor ? p.theme.palettes[p.borderColor][0] : '#dbdbdb'};
     box-shadow: inset 0 1px 2px rgba(100, 100, 100, 0.12);
     border-radius: ${p => p.theme.sizes.radius};
     flex-direction: column;

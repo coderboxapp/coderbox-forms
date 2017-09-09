@@ -25,6 +25,7 @@ storiesOf('Dropdown', module)
           isMultiple
           items={stringItems}
           color='danger'
+          borderColor='danger'
           accentColor='gray'
           onChange={(items) => console.log(items)}
           placeholder='Select importance' />
