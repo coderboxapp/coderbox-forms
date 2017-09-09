@@ -157,20 +157,50 @@ class Dropdown extends React.Component {
     return -1
   }
 
+  handleBlur = (evt) => {
+    const { allowNew, labelField, onChange } = this.props
+    const { searchQuery } = this.state
+    const allItems = this.props.items
+
+    if (allowNew && searchQuery) {
+      let newItem = isObject(allItems[0]) ? {[labelField]: searchQuery} : searchQuery
+      if (onChange) onChange(newItem)
+    }
+
+    // this.close()
+  }
+
   handleInputKeyDown = (evt) => {
-    const { isMultiple } = this.props
-    const { value, searchQuery } = this.state
+    const { isMultiple, labelField, allowNew } = this.props
+    const { value, focusIndex, searchQuery, open } = this.state
+    const items = this.getItems(searchQuery)
+    const allItems = this.props.items
 
     if (evt.keyCode === Keys.BACKSPACE && isMultiple) {
       if (!searchQuery && value.length) {
         this.deselect(null, value.concat().pop())
       }
+      return
+    }
+
+    if (evt.keyCode === Keys.ENTER) {
+      if (items.length && open) {
+        this.select(items[focusIndex])
+        this.clearSearchQuery()
+      } else if (allowNew) {
+        let newItem = isObject(allItems[0]) ? {[labelField]: searchQuery} : searchQuery
+
+        this.select(newItem)
+        if (isMultiple) {
+          this.clearSearchQuery()
+        }
+      }
+
+      this.close()
     }
   }
 
   handleKeyDown = (evt) => {
-    const { focusIndex, searchQuery } = this.state
-    const { isMultiple, labelField, allowNew } = this.props
     const moves = {
       [Keys.UP_ARROW]: -1,
       [Keys.DOWN_ARROW]: 1
@@ -182,17 +212,6 @@ class Dropdown extends React.Component {
     }
 
     if (evt.keyCode === Keys.ENTER) {
-      let items = this.getItems(searchQuery)
-
-      if (items.length) {
-        this.select(items[focusIndex])
-        this.clearSearchQuery()
-      } else if (isMultiple && allowNew) {
-        this.select({[labelField]: searchQuery})
-        this.clearSearchQuery()
-      }
-
-      this.close()
       return
     }
 
@@ -281,6 +300,7 @@ class Dropdown extends React.Component {
       <styles.Dropdown
         isOpen={open}
         onClick={this.handleClick}
+        onBlur={this.handleBlur}
         className={className}>
 
         <Control hasLeftIcon={itemIcon} hasRightIcon>

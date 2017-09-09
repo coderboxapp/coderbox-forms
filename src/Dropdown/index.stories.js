@@ -32,11 +32,12 @@ storiesOf('Dropdown', module)
       <Box>
         <Dropdown
           isSearch
+          allowNew
           value=''
-          items={[]}
+          items={stringItems}
           color='danger'
           accentColor='gray'
-          onChange={(items) => console.log(items)}
+          onChange={(item) => console.log(item)}
           placeholder='Select importance' />
       </Box>
     </div>
