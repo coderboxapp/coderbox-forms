@@ -162,7 +162,7 @@ class Dropdown extends React.Component {
     const { searchQuery } = this.state
     const allItems = this.props.items
 
-    if (allowNew && searchQuery) {
+    if (allowNew && searchQuery !== null) {
       let newItem = isObject(allItems[0]) ? {[labelField]: searchQuery} : searchQuery
       if (onChange) onChange(newItem)
     }
