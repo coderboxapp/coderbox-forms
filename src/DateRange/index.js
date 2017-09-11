@@ -40,15 +40,15 @@ class Component extends React.Component {
 
   render () {
     const { range } = this.state
-    const { hideMonths, label, ...props } = this.props
+    const { hideIcon, hideMonths, label, ...props } = this.props
 
     return (
       <DateRange {...props}>
         <div>
-          <DatePick value={range.start} onChange={d => this.handletDateChange(d, 'start')} hideMonths={hideMonths} color={props.color} size={props.size} />
+          <DatePick value={range.start} onChange={d => this.handletDateChange(d, 'start')} hideMonths={hideMonths} hideIcon={hideIcon} color={props.color} size={props.size} />
           <Icon name='long-arrow-right' />
           {range.end
-            ? <DatePick value={range.end} onChange={d => this.handletDateChange(d, 'end')} hideMonths={hideMonths} color={props.color} size={props.size} />
+            ? <DatePick value={range.end} onChange={d => this.handletDateChange(d, 'end')} hideMonths={hideMonths} hideIcon={hideIcon} color={props.color} size={props.size} />
             : <div>Present</div>
           }
         </div>

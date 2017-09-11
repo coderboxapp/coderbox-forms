@@ -8,18 +8,18 @@ import Control from 'Control'
 import { DatePick } from './styles'
 
 const months = [
-  { value: 0, text: 'January' },
-  { value: 1, text: 'February' },
-  { value: 2, text: 'March' },
-  { value: 3, text: 'April' },
+  { value: 0, text: 'Jan' },
+  { value: 1, text: 'Feb' },
+  { value: 2, text: 'Mar' },
+  { value: 3, text: 'Apr' },
   { value: 4, text: 'May' },
   { value: 5, text: 'June' },
   { value: 6, text: 'July' },
-  { value: 7, text: 'August' },
-  { value: 8, text: 'September' },
-  { value: 9, text: 'October' },
-  { value: 10, text: 'November' },
-  { value: 11, text: 'December' }
+  { value: 7, text: 'Aug' },
+  { value: 8, text: 'Sep' },
+  { value: 9, text: 'Oct' },
+  { value: 10, text: 'Nov' },
+  { value: 11, text: 'Dec' }
 ]
 
 const years = [
@@ -50,7 +50,10 @@ const years = [
   { value: 1993, text: '1993' },
   { value: 1992, text: '1992' },
   { value: 1991, text: '1991' },
-  { value: 1990, text: '1990' }
+  { value: 1990, text: '1990' },
+  { value: 1992, text: '1989' },
+  { value: 1991, text: '1988' },
+  { value: 1990, text: '1987' }
 ]
 
 const Component = ({ value, hideMonths, hideIcon, icon, onChange, ...props }) => {
