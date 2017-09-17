@@ -16,6 +16,10 @@ export const Menu = styled.div`
   padding-bottom: 1px;
   box-shadow: ${p => p.theme.shadows.normal};
 
+  .group {
+    width: 100%;
+  }
+
   .button {
     justify-content: flex-start;
     padding: 0 0.35em;

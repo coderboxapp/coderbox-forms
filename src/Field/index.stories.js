@@ -12,7 +12,7 @@ storiesOf('Field', module)
   .add('simple usage', withTheme(() => {
     return (
       <Box>
-        <Field label='Email:'>
+        <Field label='Email:' isRequired>
           <Control hasIcons>
             <Input placeholder='Type username here' />
             <Icon name='user' className='left' />
