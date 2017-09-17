@@ -1,3 +1,4 @@
+import Checkbox from 'Checkbox'
 import Control from 'Control'
 import ControlGroup from 'ControlGroup'
 import DatePick from 'DatePick'
@@ -10,6 +11,7 @@ import Input from 'Input'
 import Textarea from 'Textarea'
 
 export {
+  Checkbox,
   Control,
   ControlGroup,
   DatePick,
