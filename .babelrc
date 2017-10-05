@@ -1,16 +1,25 @@
 {
-	"presets": [
-		"es2015",
-		"react",
-		"stage-0"
-	],
-	"plugins": [
-		["styled-components"],
-		[
-			"module-resolver", {
-				"root": ["./src"],
-				"alias": {}
-			}
-		]
-	]
+  "presets": [
+    "react",
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": [ "last 2 versions" ]
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    [ "transform-object-rest-spread" ],
+    [ "transform-class-properties" ],
+    [ "styled-components" ],
+    [
+      "module-resolver",
+      {
+        "root": [ "./src" ],
+        "alias": {}
+      }
+    ]
+  ]
 }
