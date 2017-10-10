@@ -114,6 +114,10 @@ class Dropdown extends React.Component {
     this.setState({ focusIndex })
   }
 
+  escape = (text) => {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
+  }
+
   getItems = (searchQuery) => {
     let { items, isMultiple, maxItems } = this.props
     let { value } = this.state
@@ -122,7 +126,7 @@ class Dropdown extends React.Component {
       items = items.filter(
         i => {
           let label = this.getItemLabel(i)
-          return label.toLowerCase().search(searchQuery.toLowerCase()) > -1
+          return label.toLowerCase().search(this.escape(searchQuery.toLowerCase())) > -1
         }
       )
     }
