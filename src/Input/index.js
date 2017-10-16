@@ -26,14 +26,14 @@ class Component extends React.Component {
   }
 
   handleKeyDown = (evt) => {
-    const { onKeyPress, onEnter } = this.props
-    console.log('handle')
+    const { onKeyDown, onEnter } = this.props
+
     if (evt.keyCode === Keys.ENTER && onEnter) {
       onEnter(evt)
     }
 
-    if (onKeyPress) {
-      onKeyPress(evt)
+    if (onKeyDown) {
+      onKeyDown(evt)
     }
   }
 
