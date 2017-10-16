@@ -2,6 +2,11 @@ import React from 'react'
 import cx from 'classnames'
 import * as styles from './styles'
 
+const Keys = {
+  ENTER: 13,
+  ESC: 27
+}
+
 class Component extends React.Component {
   static displayName = 'Input'
   static defaultProps = {
@@ -20,6 +25,18 @@ class Component extends React.Component {
     this.input = input
   }
 
+  handleKeyDown = (evt) => {
+    const { onKeyPress, onEnter } = this.props
+    console.log('handle')
+    if (evt.keyCode === Keys.ENTER && onEnter) {
+      onEnter(evt)
+    }
+
+    if (onKeyPress) {
+      onKeyPress(evt)
+    }
+  }
+
   render () {
     const { type, readonly, isInverted, ...props } = this.props
     const className = cx(`input`, props.className)
@@ -31,6 +48,7 @@ class Component extends React.Component {
         isOutlined={!isInverted}
         isInverted={false}
         type={type}
+        onKeyDown={this.handleKeyDown}
         className={className} />
     )
   }

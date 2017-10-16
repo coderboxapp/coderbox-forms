@@ -1,6 +1,7 @@
 import React from 'react'
 import { withTheme } from 'utils'
 import { storiesOf } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
 import { Box } from '@coderbox/atoms'
 import Input from '.'
 
@@ -9,7 +10,7 @@ storiesOf('Input', module)
     return (
       <div>
         <Box vSpace='0.5rem'>
-          <Input placeholder='Type username here' />
+          <Input placeholder='Type username here' onEnter={action('on enter')} />
           <Input placeholder='Type password here' type='password' />
         </Box>
         <Box vSpace='0.5rem'>
