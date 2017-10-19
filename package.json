@@ -4,9 +4,10 @@
   "description": "React Components used to build forms.",
   "main": "lib/coderbox-forms.js",
   "scripts": {
-    "prepare": "yarn build",
+    "prepare": "npm run build",
     "standard": "standard",
     "build": "webpack --env production",
+    "dev": "webpack --env development",
     "start": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "deploy-storybook": "storybook-to-ghpages"
