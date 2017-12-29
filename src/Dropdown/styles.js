@@ -27,7 +27,7 @@ export const Dropdown = styled.div`
     width: 100%;
     border: 1px solid ${p => p.borderColor ? p.theme.palettes[p.borderColor][0] : '#dbdbdb'};
     box-shadow: inset 0 1px 2px rgba(100, 100, 100, 0.12);
-    border-radius: ${p => p.theme.sizes.radius};
+    border-radius: 3px;
     flex-direction: column;
     align-items: flex-start;
   }

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { withSize, isHidden } from 'styled-utils'
 
-const radius = p => p.theme.sizes.radius
+const radius = p => '3px'
 
 export const Menu = styled.div`
   font-family: ${p => p.theme.fonts.primary};
@@ -14,7 +14,7 @@ export const Menu = styled.div`
   border: 1px solid transparent;
   border-radius: ${radius};
   padding-bottom: 1px;
-  box-shadow: ${p => p.theme.shadows.normal};
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
 
   .group {
     width: 100%;

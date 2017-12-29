@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components'
 import { rgba } from 'polished'
-import { withSize, withColor, colors } from 'styled-utils'
+import { withSize, withColor } from 'styled-utils'
+import * as color from 'styled-utils/color'
 
 const override = p => {
   if (!p.color) return
 
-  let { bgColor, textColor } = colors(p)
+  let { bgColor, textColor } = color.fromProps(p)
   let isInverted = !p.isOutlined
 
   return css`
@@ -28,7 +29,7 @@ export const Textarea = styled.textarea`
   padding: 0.625em;
   resize: vertical;
   border: 1px solid #dbdbdb;
-  border-radius: ${p => p.theme.sizes.radius};
+  border-radius: 3px;
   box-sizing: border-box;
   appearance: none;
   box-shadow: inset 0 1px 2px rgba(100, 100, 100, 0.12);

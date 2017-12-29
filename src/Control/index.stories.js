@@ -21,7 +21,7 @@ storiesOf('Control', module)
         <Control color='danger' hasIcons>
           <Input color='danger' placeholder='Type password (danger)' type='password' />
           <Icon name='unlock' className='left' />
-          <Icon color='danger' tone={2} name='warning' className='right' />
+          <Icon color='danger' name='warning' className='right' />
         </Control>
         <Control>
           <Dropdown items={labels} isSearch placeholder='Select importance' />
